@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Kaikki harjoitustöiden aiheet</h1>
+
+  <p>
+    <a href="#" class="btn btn-success">Lisää aihe</a>
+  </p>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Aiheen nimi</th>
+        <th>Aiheen kuvaus</th>
+        <th>Kurssin nimi</th>
+        <th>Vastuuhenkilöt</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <tr>
+        <td><a href="http://andra.users.cs.helsinki.fi/tsoha/topic/1">Shakki</a></td>
+        <td>Yksinkertainen shakki</td>
+        <td>Ohjelmointi</td>
+        <td>Ope1</td>
+        <th><a class="btn btn-default btn-sm" href="http://andra.users.cs.helsinki.fi/tsoha/topic/edit/1">Muokkaa</a></th>
+      </tr>
+    </tbody>
+  </table>
+{% endblock %}

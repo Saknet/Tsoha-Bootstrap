@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Shakki</h1>
+  <!-- Painikkeet tähän -->
+  <p>
+    <button class="btn btn-danger">Poista</button> <a href="http://andra.users.cs.helsinki.fi/tsoha/topic/edit/1" class="btn btn-default">Muokkaa</a>
+  </p>
+  <!-- Tiedot tulee listana tähän -->
+  <ul>
+    <li><strong>Kurssin nimi:</strong> Ohjelmointi</li>
+    <li><strong>Vastuuhenkilöt:</strong> <label class="label label-danger">Ope1</label></li>
+    <li><strong>Suoritettu:</strong> 2</li>
+    <li><strong>Keskeytetty:</strong> 1</li>
+    <li><strong>Keskimääräinen kesto:</strong> 100</li>
+    <li><strong>Keskimääräinen arvosana:</strong> 100</li> 
+  </ul>
+  <!-- Kuvaus tulee tähän -->
+  <p>
+      yksinkertainen shakki
+  </p>
+{% endblock %}

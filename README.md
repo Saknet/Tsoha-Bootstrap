@@ -7,4 +7,23 @@ Yleisiä linkkejä:
 
 ## Työn aihe
 
-Laita tähän aihekuvaus tai [linkki valmiiseen aiheeseen](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Tyoaihekanta.html) 
+[Aiheen kuvaus](http://advancedkittenry.github.io/suunnittelu_ja_tyoymparisto/aiheet/Tyoaihekanta.html)
+
+## Suunnitelmat
+
+[Etusivu (login)](http://andra.users.cs.helsinki.fi/tsoha/login)
+
+[Aiheiden listaussivu](http://andra.users.cs.helsinki.fi/tsoha/topic)
+[Aiheen muokkaussivu](http://andra.users.cs.helsinki.fi/tsoha/topic/edit/1)
+[Aiheen esittelysivu](http://andra.users.cs.helsinki.fi/tsoha/topic/1)
+
+[Suoritusten listaussivu](http://andra.users.cs.helsinki.fi/tsoha/credit)
+[Suorituksen muokkaussivu](http://andra.users.cs.helsinki.fi/tsoha/credit/edit/1)
+[Suorituksen esittelysivu](http://andra.users.cs.helsinki.fi/tsoha/credit/1)
+
+[Henkilöiden listaussivu](http://andra.users.cs.helsinki.fi/tsoha/person)
+[Henkilön muokkaussivu](http://andra.users.cs.helsinki.fi/tsoha/person/edit/1)
+[Henkilön esittelysivu](http://andra.users.cs.helsinki.fi/tsoha/person/1)
+
+
+
