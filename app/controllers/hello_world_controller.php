@@ -19,7 +19,7 @@
     }
     
     public static function credit_edit(){
-        View::make('suunnitelmat/credit_show.html');
+        View::make('suunnitelmat/credit_edit.html');
     }
     
     public static function person_list(){
@@ -31,7 +31,7 @@
     }
     
     public static function person_edit(){
-        View::make('suunnitelmat/person_show.html');
+        View::make('suunnitelmat/person_edit.html');
     }
     
     public static function topic_list(){

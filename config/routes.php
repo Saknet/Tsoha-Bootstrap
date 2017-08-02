@@ -25,7 +25,7 @@
   });
   
   $routes->get('/credit/1', function() {
-      HelloWorldController::creditc_show();     
+      HelloWorldController::credit_show();     
   });
   
   $routes->get('/credit/edit/1', function() {

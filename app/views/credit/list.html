@@ -1,16 +1,37 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <div>TODO write content</div>
-    </body>
-</html>
+{% extends "base.html" %}
+{% block content %}
+  <h1>Kaikki harjoitustöiden aiheet</h1>
+
+  <p>
+    <a href="{{base_path}}/credit/new" class="btn btn-success">Lisää suoritus</a>
+  </p>
+
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Linkki suoritukseen</th>
+        <th>Aiheen nimi</th>
+        <th>Vastuuhenkilö</th>
+        <th>Aloitettu</th>
+        <th>Keskeytetty suoritus</th>
+        <th>Valmis</th>
+        <th>Arvosana</th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+
+      <tr>
+        <td><a href="{{base_path}}/credit/1">1</a></td>
+        <td><a href="{{base_path}}/topic/1">Shakki</a></td>
+        <td><a href="{{base_path}}/person/1">Ope1</a></td>
+        <td>2015-09-09</td>
+        <td>Ei</td>
+        <td>2015-11-09</td>
+        <td>5</td>
+        <th><a class="btn btn-info btn-sm" href="{{base_path}}/credit/edit/1">Muokkaa</a></th>
+      </tr>
+    </tbody>
+  </table>
+{% endblock %}
