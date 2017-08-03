@@ -1,4 +1,7 @@
-  <h1>Ope1</h1>
+{% extends "base.html" %}
+{% block content %} 
+
+<h1>Ope1</h1>
   <p>
     <button class="btn btn-danger">Poista</button> <a href="{{base_path}}/person/edit/1" class="btn btn-info">Muokkaa</a>
   </p>
@@ -6,3 +9,5 @@
     <li><strong>Käyttäjän nimi:</strong> Ope1</li>
     <li><strong>Ylläpitäjä:</strong> Kyllä</li>
   </ul>
+  
+ {% endblock %}

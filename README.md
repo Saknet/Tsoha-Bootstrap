@@ -25,5 +25,9 @@ Yleisiä linkkejä:
 [Henkilön muokkaussivu](http://andra.users.cs.helsinki.fi/tsoha/person/edit/1)
 [Henkilön esittelysivu](http://andra.users.cs.helsinki.fi/tsoha/person/1)
 
+[Kurssien listaussivu](http://andra.users.cs.helsinki.fi/tsoha/course)
+[Kurssin muokkaussivu](http://andra.users.cs.helsinki.fi/tsoha/course/edit/1)
+[Kurssin esittelysivu](http://andra.users.cs.helsinki.fi/tsoha/course/1)
+
 
 

@@ -43,6 +43,18 @@
   $routes->get('/person/edit/1', function() {
       HelloWorldController::person_edit();     
   });
+  
+  $routes->get('/course', function() {
+      HelloWorldController::course_list();
+  });
+  
+  $routes->get('/course/1', function() {
+      HelloWorldController::course_show();     
+  });
+  
+  $routes->get('/course/edit/1', function() {
+      HelloWorldController::course_edit();     
+  });
 
   $routes->get('/login', function() {
       HelloWorldController::login();

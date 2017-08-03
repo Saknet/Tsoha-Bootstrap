@@ -6,12 +6,18 @@ CREATE TABLE Person(
   admin boolean DEFAULT FALSE
 );
 
+CREATE TABLE Course(
+  id SERIAL PRIMARY KEY, 
+  name varchar(50) NOT NULL,
+  incharge INTEGER REFERENCES Person(id)
+);
+
 CREATE TABLE Topic(
   id SERIAL PRIMARY KEY,
   name varchar(50) NOT NULL, 
-  addedBy INTEGER REFERENCES Person(id),
+  addedby INTEGER REFERENCES Person(id),
   description varchar(500),
-  courseName varchar(50)
+  course INTEGER REFERENCES Course(id)
 );
 
 CREATE TABLE Credit(
