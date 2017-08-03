@@ -1,6 +1,6 @@
 -- Lisää INSERT INTO lauseet tähän tiedostoon
-INSERT INTO Person (name, password, admin) VALUES ('Ope1', 'Ope1', TRUE);
-INSERT INTO Person (name, password) VALUES ('Ope2', 'Ope2');
+INSERT INTO Person (name, username, password, admin) VALUES ('Ope1', 'ano', 'nyymi', TRUE);
+INSERT INTO Person (name, username, password) VALUES ('Ope2', 'nyymi', 'ano');
 
 INSERT INTO Course (name) VALUES ('Ohjelmointi');
 INSERT INTO Course (name) VALUES ('Tietokantasovellus');
