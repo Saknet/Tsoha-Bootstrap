@@ -1,13 +1,17 @@
 <?php
 
-  class HelloWorldController extends BaseController{
-
+class HelloWorldController extends BaseController{
+    
     public static function index(){
         View::make('suunnitelmat/login.html');
     }
 
     public static function sandbox(){
-        View::make('helloworld.html');
+        $ope1 = Person::find(1);
+        $persons = Person::all();
+        
+        Kint::dump($persons);
+        Kint::dump($ope1);
     }
     
     public static function credit_list(){
