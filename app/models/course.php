@@ -1,6 +1,6 @@
 <?php
 
-class Topic extends BaseModel{
+class Course extends BaseModel{
 
   public $id, $name, $incharge;
 
@@ -16,10 +16,10 @@ class Topic extends BaseModel{
     $courses = array();
 
     foreach($rows as $row){
-      $courses[] = new Topic(array(
+      $courses[] = new Course(array(
         'id' => $row['id'],
         'name' => $row['name'],
-        'incharge' => $row['incharge']
+        'incharge' => Person::find($row['incharge'])
       ));
     }
 
@@ -32,7 +32,7 @@ class Topic extends BaseModel{
     $row = $query->fetch();
 
     if($row){
-      $course = new Topic(array(
+      $course = new Course(array(
         'id' => $row['id'],
         'name' => $row['name'],
         'incharge' => $row['incharge']

@@ -18,9 +18,9 @@ class Topic extends BaseModel{
     foreach($rows as $row){
       $topics[] = new Topic(array(
         'id' => $row['id'],
-        'addedby' => $row['addedby'],
+        'addedby' => Person::find($row['addedby']),
         'description' => $row['description'],
-        'course' => $row['course']
+        'course' => Course::find($row['course'])
       ));
     }
 

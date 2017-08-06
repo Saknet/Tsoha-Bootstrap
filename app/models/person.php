@@ -1,6 +1,6 @@
 <?php
 
-class Topic extends BaseModel{
+class Person extends BaseModel{
 
   public $id, $name, $username, $password, $admin;
 
@@ -16,7 +16,7 @@ class Topic extends BaseModel{
     $persons = array();
 
     foreach($rows as $row){
-      $persons[] = new Topic(array(
+      $persons[] = new Person(array(
         'id' => $row['id'],
         'name' => $row['name'],
         'username' => $row['username'],
@@ -34,7 +34,7 @@ class Topic extends BaseModel{
     $row = $query->fetch();
 
     if($row){
-      $person = new Topic(array(
+      $person = new Person(array(
         'id' => $row['id'],
         'name' => $row['name'],
         'username' => $row['username'],

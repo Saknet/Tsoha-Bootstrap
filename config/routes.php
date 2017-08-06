@@ -9,7 +9,7 @@
   });
   
   $routes->get('/topic', function() {
-      HelloWorldController::topic_list();
+      TopicController::index();
   });
   
   $routes->get('/topic/1', function() {
@@ -33,7 +33,7 @@
   });
   
   $routes->get('/person', function() {
-      HelloWorldController::person_list();
+      PersonController::index();
   });
   
   $routes->get('/person/1', function() {
@@ -45,7 +45,7 @@
   });
   
   $routes->get('/course', function() {
-      HelloWorldController::course_list();
+      CourseController::index();
   });
   
   $routes->get('/course/1', function() {

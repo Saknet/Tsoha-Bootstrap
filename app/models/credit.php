@@ -1,6 +1,6 @@
 <?php
 
-class Topic extends BaseModel{
+class Credit extends BaseModel{
 
   public $id, $givenby, $topic_id, $interrupted, $startdate, $enddate, $grade;
 
@@ -16,7 +16,7 @@ class Topic extends BaseModel{
     $credits = array();
 
     foreach($rows as $row){
-      $credits[] = new Topic(array(
+      $credits[] = new Credit(array(
         'id' => $row['id'],
         'givenby' => $row['givenby'],
         'topic_id' => $row['topic_id'],
@@ -36,7 +36,7 @@ class Topic extends BaseModel{
     $row = $query->fetch();
 
     if($row){
-      $credit = new Topic(array(
+      $credit = new Credit(array(
         'id' => $row['id'],
         'givenby' => $row['givenby'],
         'topic_id' => $row['topic_id'],
