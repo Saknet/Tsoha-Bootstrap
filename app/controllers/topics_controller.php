@@ -6,4 +6,9 @@ class TopicController extends BaseController{
     $topics = Topic::all();
     View::make('topic/index.html', array('topics' => $topics));
   }
+  
+  public static function show($id) {
+    $person = Topic::find($id);
+    View::make('topic/show.html', array('topic' => $person));
+  }  
 }

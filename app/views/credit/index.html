@@ -23,7 +23,7 @@
     <tbody>
       {% for credit in credits %}
       <tr>
-        <td><a href="{{base_path}}/credit/1">1</a></td>
+        <td><a href="{{base_path}}/credit/{{credit.id}}">{{credit.id}}</a></td>
         <td><a href="{{base_path}}/topic/{{credit.topic.id}}">{{credit.topic.name}}</a></td>
         <td><a href="{{base_path}}/person/{{credit.givenby.id}}">{{credit.givenby.name}}</a></td>
         <td>{{credit.startdate}}</td>

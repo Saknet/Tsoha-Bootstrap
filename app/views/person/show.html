@@ -1,13 +1,19 @@
 {% extends "base.html" %}
 {% block content %} 
 
-<h1>Ope1</h1>
+<h1>{{person.name}}</h1>
   <p>
     <button class="btn btn-danger">Poista</button> <a href="{{base_path}}/person/edit/1" class="btn btn-info">Muokkaa</a>
   </p>
   <ul>
-    <li><strong>Käyttäjän nimi:</strong> Ope1</li>
-    <li><strong>Ylläpitäjä:</strong> Kyllä</li>
+    <li><strong>Käyttäjän nimi:</strong> {{person.name}}</li>
+    <li><strong>Ylläpitäjä:</strong>
+        {% if person.admin %}
+         Kyllä
+        {% else %}
+         Ei
+        {% endif %}
+    </li>
   </ul>
   
  {% endblock %}

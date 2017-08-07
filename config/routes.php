@@ -12,8 +12,8 @@
       TopicController::index();
   });
   
-  $routes->get('/topic/1', function() {
-      HelloWorldController::topic_show();     
+  $routes->get('/topic/:id', function($id) {
+      TopicController::show($id);     
   });
   
   $routes->get('/topic/edit/1', function() {
@@ -24,8 +24,8 @@
       CreditController::index();
   });
   
-  $routes->get('/credit/1', function() {
-      HelloWorldController::credit_show();     
+  $routes->get('/credit/:id', function($id) {
+      CreditController::show($id);     
   });
   
   $routes->get('/credit/edit/1', function() {
@@ -36,10 +36,10 @@
       PersonController::index();
   });
   
-  $routes->get('/person/1', function() {
-      HelloWorldController::person_show();     
+  $routes->get('/person/:id', function($id) {
+      PersonController::show($id);     
   });
-  
+
   $routes->get('/person/edit/1', function() {
       HelloWorldController::person_edit();     
   });
@@ -48,8 +48,8 @@
       CourseController::index();
   });
   
-  $routes->get('/course/1', function() {
-      HelloWorldController::course_show();     
+  $routes->get('/course/:id', function($id) {
+      CourseController::show($id);     
   });
   
   $routes->get('/course/edit/1', function() {

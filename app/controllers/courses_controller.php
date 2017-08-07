@@ -6,4 +6,9 @@ class CourseController extends BaseController{
     $courses = Course::all();
     View::make('course/index.html', array('courses' => $courses));
   }
+  
+  public static function show($id) {
+    $course = Course::find($id);
+    View::make('course/show.html', array('course' => $course));
+  }  
 }

@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}  
+
+<h1>{{course.name}}</h1>
+
+<p>
+    <button class="btn btn-danger">Poista</button> <a href="{{base_path}}/course/edit/1" class="btn btn-info">Muokkaa</a>
+</p>
+
+<ul>
+    <li><strong>Kurssin nimi:</strong> {{course.name}}</li>
+    <li><strong>Vastuuhenkilö</strong><a href="{{base_path}}/person/{{course.incharge.id}}"> {{course.incharge.name}}</a></li>
+</ul>
+  
+<h3>Kurssin aiheet</h3>  
+
+<table class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Aiheen nimi</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        <tr>
+            <td><a href="{{base_path}}/topic/1">Shakki</a></td>
+        </tr>
+    </tbody>
+</table>
+  
+{% endblock %}

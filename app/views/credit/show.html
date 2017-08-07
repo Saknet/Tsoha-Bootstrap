@@ -1,17 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
 
-  <h1>Shakki</h1>
+  <h1>Suoritus</h1>
   <p>
     <button class="btn btn-danger">Poista</button> <a href="{{base_path}}/credit/edit/1" class="btn btn-info">Muokkaa</a>
   </p>
   <ul>
-    <li><strong>Aiheen nimi:</strong> Shakki</li>
-    <li><strong>Vastuuhenkilöt:</strong> <a href="{{base_path}}/person/1">Ope1</a></li>
-    <li><strong>Aloitettu:</strong> 2015-09-09</li>
-    <li><strong>Keskeytetty:</strong> Ei</li>
-    <li><strong>Valmis:</strong> 2015-11-09</li>
-    <li><strong>Arvosana:</strong> 5</li> 
+    <li><strong>Aiheen nimi:</strong> {{credit.topic.name}}</li>
+    <li><strong>Vastuuhenkilöt:</strong> <a href="{{base_path}}/person/{{credit.givenby.id}}">{{credit.givenby.name}}</a></li>
+    <li><strong>Aloituspäivämäärä:</strong> {{credit.startdate}}</li>
+    <li><strong>Hyväksytty (pvm):</strong> 
+        {% if credit.interrupted %}
+        Suoritus keskeytetty
+        {% else %}
+        {{credit.enddate}}
+        {% endif %}
+    </li>
+    <li><strong>Arvosana:</strong> {{credit.grade}}</li> 
   </ul>
 
 {% endblock %}
