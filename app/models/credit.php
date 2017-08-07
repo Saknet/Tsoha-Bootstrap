@@ -2,7 +2,7 @@
 
 class Credit extends BaseModel{
 
-  public $id, $givenby, $topic_id, $interrupted, $startdate, $enddate, $grade;
+  public $id, $givenby, $topic, $interrupted, $startdate, $enddate, $grade;
 
   public function __construct($attributes){
     parent::__construct($attributes);
@@ -18,8 +18,8 @@ class Credit extends BaseModel{
     foreach($rows as $row){
       $credits[] = new Credit(array(
         'id' => $row['id'],
-        'givenby' => $row['givenby'],
-        'topic_id' => $row['topic_id'],
+        'givenby' => Person::find($row['givenby']),
+        'topic' => Topic::find($row['topic']),
         'interrupted' => $row['interrupted'],
         'startdate' => $row['startdate'],
         'enddate' => $row['enddate'],
@@ -38,8 +38,8 @@ class Credit extends BaseModel{
     if($row){
       $credit = new Credit(array(
         'id' => $row['id'],
-        'givenby' => $row['givenby'],
-        'topic_id' => $row['topic_id'],
+        'givenby' => Person::find($row['givenby']),
+        'topic' => Topic::find($row['topic']),
         'interrupted' => $row['interrupted'],
         'startdate' => $row['startdate'],
         'enddate' => $row['enddate'],
@@ -53,8 +53,8 @@ class Credit extends BaseModel{
   }
   
   public function save(){
-    $query = DB::connection()->prepare('INSERT INTO Credit (givenby, topic_id, startdate, enddate, grade) VALUES (:givenby, :topic_id, :startdate, :enddate, :grade) RETURNING id');
-    $query->execute(array('givenby' => $this->givenby, 'topic_id' => $this->topic_id, 'startdate' => $this->startdate, 'enddate' => $this->enddate, 'grade' => $this->grade));
+    $query = DB::connection()->prepare('INSERT INTO Credit (givenby, topic, startdate, enddate, grade) VALUES (:givenby, :topic_id, :startdate, :enddate, :grade) RETURNING id');
+    $query->execute(array('givenby' => $this->givenby, 'topic' => $this->topic, 'startdate' => $this->startdate, 'enddate' => $this->enddate, 'grade' => $this->grade));
     $row = $query->fetch();
     $this->id = $row['id'];
   }

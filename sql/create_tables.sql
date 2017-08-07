@@ -24,7 +24,7 @@ CREATE TABLE Topic(
 CREATE TABLE Credit(
   id SERIAL PRIMARY KEY, 
   givenBy INTEGER REFERENCES Person(id),
-  topic_id INTEGER REFERENCES Topic(id),
+  topic INTEGER REFERENCES Topic(id),
   interrupted boolean DEFAULT FALSE,
   startDate DATE,
   endDate DATE,

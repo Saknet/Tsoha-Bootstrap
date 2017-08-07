@@ -35,7 +35,7 @@ class Course extends BaseModel{
       $course = new Course(array(
         'id' => $row['id'],
         'name' => $row['name'],
-        'incharge' => $row['incharge']
+        'incharge' => Person::find($row['incharge'])
       ));
 
       return $course;

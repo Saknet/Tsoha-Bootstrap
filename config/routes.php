@@ -21,7 +21,7 @@
   });
   
   $routes->get('/credit', function() {
-      HelloWorldController::credit_list();
+      CreditController::index();
   });
   
   $routes->get('/credit/1', function() {

@@ -21,17 +21,24 @@
     </thead>
 
     <tbody>
-
+      {% for credit in credits %}
       <tr>
         <td><a href="{{base_path}}/credit/1">1</a></td>
-        <td><a href="{{base_path}}/topic/1">Shakki</a></td>
-        <td><a href="{{base_path}}/person/1">Ope1</a></td>
-        <td>2015-09-09</td>
-        <td>Ei</td>
-        <td>2015-11-09</td>
-        <td>5</td>
+        <td><a href="{{base_path}}/topic/{{credit.topic.id}}">{{credit.topic.name}}</a></td>
+        <td><a href="{{base_path}}/person/{{credit.givenby.id}}">{{credit.givenby.name}}</a></td>
+        <td>{{credit.startdate}}</td>
+        <td>
+            {% if credit.interrupted %}
+            Kyllä
+            {% else %}
+            Ei
+            {% endif %}
+        </td>
+        <td>{{credit.enddate}}</td>
+        <td>{{credit.grade}}</td>
         <th><a class="btn btn-info btn-sm" href="{{base_path}}/credit/edit/1">Muokkaa</a></th>
       </tr>
+      {% endfor %}
     </tbody>
   </table>
 {% endblock %}

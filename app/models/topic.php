@@ -2,7 +2,7 @@
 
 class Topic extends BaseModel{
 
-  public $id, $addedby, $description, $course;
+  public $id, $name, $addedby, $description, $course;
 
   public function __construct($attributes){
     parent::__construct($attributes);
@@ -18,6 +18,7 @@ class Topic extends BaseModel{
     foreach($rows as $row){
       $topics[] = new Topic(array(
         'id' => $row['id'],
+        'name' => $row['name'],
         'addedby' => Person::find($row['addedby']),
         'description' => $row['description'],
         'course' => Course::find($row['course'])
@@ -35,9 +36,10 @@ class Topic extends BaseModel{
     if($row){
       $topic = new Topic(array(
         'id' => $row['id'],
-        'addedby' => $row['addedby'],
+        'name' => $row['name'],
+        'addedby' => Person::find($row['addedby']),
         'description' => $row['description'],
-        'course' => $row['course']
+        'course' => Course::find($row['course'])
       ));
 
       return $topic;
@@ -47,8 +49,8 @@ class Topic extends BaseModel{
   }
   
   public function save(){
-    $query = DB::connection()->prepare('INSERT INTO Person (addedby, description, course) VALUES (:addedby, :description, :course) RETURNING id');
-    $query->execute(array('addedby' => $this->addedby, 'description' => $this->description, 'course' => $this->course));
+    $query = DB::connection()->prepare('INSERT INTO Person (name, addedby, description, course) VALUES (:name, :addedby, :description, :course) RETURNING id');
+    $query->execute(array('name' => $this->name, 'addedby' => $this->addedby, 'description' => $this->description, 'course' => $this->course));
     $row = $query->fetch();
     $this->id = $row['id'];
   }
