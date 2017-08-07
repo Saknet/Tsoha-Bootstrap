@@ -44,6 +44,22 @@ class Course extends BaseModel{
     return null;
   }
   
+  public static function find_by_person($id) {
+    $query = DB::connection()->prepare('SELECT * FROM Course WHERE incharge = :id');
+    $query->execute(array('id' => $id));
+    $rows = $query->fetchAll();
+    $courses = array();
+
+    foreach($rows as $row){
+      $courses[] = new Course(array(
+        'id' => $row['id'],
+        'name' => $row['name']
+      ));
+    }
+
+    return $courses;
+  }
+  
   public function save(){
     $query = DB::connection()->prepare('INSERT INTO Course (name, incharge) VALUES (:name, :incharge) RETURNING id');
     $query->execute(array('name' => $this->name, 'incharge' => $this->incharge));

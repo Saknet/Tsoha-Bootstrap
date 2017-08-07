@@ -8,7 +8,25 @@ class TopicController extends BaseController{
   }
   
   public static function show($id) {
-    $person = Topic::find($id);
-    View::make('topic/show.html', array('topic' => $person));
-  }  
+    $topic = Topic::find($id);
+    $credits = Credit::find_by_topic($id);
+    View::make('topic/show.html', array('topic' => $topic, 'credits' => $credits));
+  }
+  
+  public static function create() {
+    View::make('topic/new.html');   
+  }
+  
+  public static function store(){
+    $params = $_POST;
+    $topic = new Topic(array(
+      'name' => $params['name'],
+      'addedby' => $params['addedby'],
+      'description' => $params['description'],
+      'course' => $params['course']       
+    ));
+
+    $topic->save();
+    Redirect::to('/topic/' . $topic->id, array('message' => 'Aiheen tiedot lisättiin järjestelmään!'));
+  }
 }

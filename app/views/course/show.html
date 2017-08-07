@@ -17,14 +17,20 @@
 <table class="table table-striped table-bordered">
     <thead>
         <tr>
-            <th>Aiheen nimi</th>
+          <th>Aiheen nimi</th>
+          <th>Aiheen kuvaus</th>
+          <th>Vastuuhenkilöt</th>
         </tr>
     </thead>
 
     <tbody>
+        {% for topic in topics %}
         <tr>
-            <td><a href="{{base_path}}/topic/1">Shakki</a></td>
+          <td><a href="{{base_path}}/topic/{{topic.id}}">{{topic.name}}</a></td>
+          <td>{{topic.description}}</td>
+          <td><a href="{{base_path}}/person/{{topic.addedby.id}}">{{topic.addedby.name}}</a></td>
         </tr>
+        {% endfor %}
     </tbody>
 </table>
   

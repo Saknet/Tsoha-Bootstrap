@@ -17,4 +17,38 @@
   <p>
     {{topic.description}}  
   </p>
+  
+  <h3>Aiheen suoritukset</h3>  
+  
+  <table class="table table-striped table-bordered">
+    <thead>
+      <tr>
+        <th>Linkki suoritukseen</th>
+        <th>Vastuuhenkilö</th>
+        <th>Aloitettu</th>
+        <th>Keskeytetty suoritus</th>
+        <th>Valmis</th>
+        <th>Arvosana</th>
+      </tr>
+    </thead>
+
+    <tbody>
+        {% for credit in credits %}
+      <tr>
+        <td><a href="{{base_path}}/credit/{{credit.id}}">{{credit.id}}</a></td>
+        <td><a href="{{base_path}}/person/{{credit.givenby.id}}">{{credit.givenby.name}}</a></td>
+        <td>{{credit.startdate}}</td>
+        <td>
+            {% if credit.interrupted %}
+            Kyllä
+            {% else %}
+            Ei
+            {% endif %}
+        </td>
+        <td>{{credit.enddate}}</td>
+        <td>{{credit.grade}}</td>
+      </tr>
+        {% endfor %}
+    </tbody>
+</table>
 {% endblock %}

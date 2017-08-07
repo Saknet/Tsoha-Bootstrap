@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Lisää uuden suorituksen tiedot järjestelmään</h1>
+
+  <form method="post" action="{{base_path}}/credit">
+    <div class="form-group">
+      <label>Arvioija</label>
+      <input type="text" name="givenby" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label>Aihe</label>
+      <input type="text" name="topic" class="form-control">
+    </div>
+      
+    <div class="form-group">
+      <label>Keskeytetty</label>
+      <input type="checkbox" name="interrupted" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label>Aloituspäivämäärä</label>
+      <input type="text" name="startdate" class="form-control">
+    </div>  
+      
+    <div class="form-group">
+      <label>Hyväksytty (pvm)</label>
+      <input type="text" name="enddate" class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label>Arvosana</label>
+      <input type="text" name="grade" class="form-control">
+    </div>        
+
+    <div class="form-group">
+      <button type="submit" class="btn btn-primary">Lisää</button>
+    </div>
+  </form>
+{% endblock %} 
