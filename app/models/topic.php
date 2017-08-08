@@ -90,4 +90,71 @@ class Topic extends BaseModel{
     $row = $query->fetch();
     $this->id = $row['id'];
   }
+  
+  public function averageGrade() {
+    $credits = Credit::find_by_topic($this->id);      
+    $sum = 0;
+    $count = 0;    
+    
+    foreach($credits as $credit) {
+        if ($credit->grade > 0) {
+            $sum =+ $credit->grade;
+            $count++;
+        }
+    }
+    
+    if ($count != 0) {
+        return $sum / $count;   
+    } else {
+        return 0;
+    }
+  }
+  
+  public function totalCredits() {
+    $credits = Credit::find_by_topic($this->id);      
+    $count = 0;    
+    
+    foreach($credits as $credit) {
+        if ($credit->grade > 0) {
+            $count++;
+        }
+    }
+    
+    return $count;
+  }
+  
+  public function interrupted() {
+    $credits = Credit::find_by_topic($this->id);      
+    $count = 0;    
+    
+    foreach($credits as $credit) {
+        if ($credit->interrupted) {
+            $count++;
+        }
+    }
+    
+    return $count;
+  }
+
+  public function averageTimeSpent() {
+    $credits = Credit::find_by_topic($this->id);      
+    $sum = 0;
+    $count = 0;    
+    
+    foreach($credits as $credit) {
+        if ($credit->enddate > 0) {
+            $end = $credit->enddate;
+            $start = $credit->startdate;
+            $days_between = round((strtotime($end) - strtotime($start)) / 86400);
+            $sum =+ $days_between;
+            $count++;
+        }
+    }
+    
+    if ($count != 0) {
+        return $sum / $count;   
+    } else {
+        return 0;
+    }
+  }  
 }
