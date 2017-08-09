@@ -14,7 +14,9 @@ class TopicController extends BaseController{
   }
   
   public static function create() {
-    View::make('topic/new.html');   
+    $persons = Person::all();
+    $courses = Course::all();
+    View::make('topic/new.html', array('persons' => $persons, 'courses' => $courses));   
   }
   
   public static function store(){
@@ -25,7 +27,7 @@ class TopicController extends BaseController{
       'description' => $params['description'],
       'course' => $params['course']       
     ));
-
+       
     $topic->save();
     Redirect::to('/topic/' . $topic->id, array('message' => 'Aiheen tiedot lisättiin järjestelmään!'));
   }

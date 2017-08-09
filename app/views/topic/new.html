@@ -2,15 +2,19 @@
 {% block content %}
   <h1>Lisää uuden aiheen tiedot järjestelmään</h1>
 
-  <form method="post" action="{{base_path}}/credit">
+  <form method="post" action="{{base_path}}/topic">
     <div class="form-group">
       <label>Aiheen nimi</label>
       <input type="text" name="name" class="form-control">
     </div>
 
     <div class="form-group">
-      <label>Vastuuhenkilö</label>
-      <input type="text" name="addedby" class="form-control">
+      <label>Valitse aiheen vastuuhenkilö</label>
+      <select name="addedby" class="form-control">
+        {% for person in persons %}
+        <option value="{{person.id}}"> {{person.name}}</option>
+        {% endfor %}
+      </select>
     </div>
 
     <div class="form-group">
@@ -19,9 +23,13 @@
     </div>  
       
     <div class="form-group">
-      <label>Kurssi</label>
-      <input type="text" name="course" class="form-control">
-    </div>      
+      <label>Valitse aiheen kurssi</label>
+      <select name="course" class="form-control">
+        {% for course in courses %}
+        <option value="{{course.id}}"> {{course.name}}</option>
+        {% endfor %}
+      </select>
+    </div>     
 
     <div class="form-group">
       <button type="submit" class="btn btn-primary">Lisää</button>

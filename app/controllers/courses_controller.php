@@ -14,7 +14,8 @@ class CourseController extends BaseController{
   }  
   
   public static function create() {
-    View::make('course/new.html');   
+    $persons = Person::all();
+    View::make('course/new.html', array('persons' => $persons));   
   }
   
   public static function store(){

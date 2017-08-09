@@ -43,7 +43,7 @@ class Credit extends BaseModel{
         'interrupted' => $row['interrupted'],
         'startdate' => $row['startdate'],
         'enddate' => $row['enddate'],
-        'grade' => $row['grade']  
+        'grade' => $row['grade']   
       ));
 
       return $credit;
@@ -62,6 +62,7 @@ class Credit extends BaseModel{
       $credits[] = new Credit(array(
         'id' => $row['id'],
         'givenby' => Person::find($row['givenby']),
+        'topic' => Topic::find($row['topic']),
         'interrupted' => $row['interrupted'],
         'startdate' => $row['startdate'],
         'enddate' => $row['enddate'],
@@ -73,8 +74,8 @@ class Credit extends BaseModel{
   }
   
   public function save(){
-    $query = DB::connection()->prepare('INSERT INTO Credit (givenby, topic, startdate, enddate, grade) VALUES (:givenby, :topic_id, :startdate, :enddate, :grade) RETURNING id');
-    $query->execute(array('givenby' => $this->givenby, 'topic' => $this->topic, 'startdate' => $this->startdate, 'enddate' => $this->enddate, 'grade' => $this->grade));
+    $query = DB::connection()->prepare('INSERT INTO Credit (givenby, topic, interrupted, startdate, enddate, grade) VALUES (:givenby, :topic, :interrupted, :startdate, :enddate, :grade) RETURNING id');
+    $query->execute(array('givenby' => $this->givenby, 'topic' => $this->topic, 'interrupted' => $this->interrupted, 'startdate' => $this->startdate, 'enddate' => $this->enddate, 'grade' => $this->grade));
     $row = $query->fetch();
     $this->id = $row['id'];
   }

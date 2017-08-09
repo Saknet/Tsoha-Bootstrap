@@ -12,11 +12,26 @@ class CreditController extends BaseController{
     View::make('credit/show.html', array('credit' => $credit));
   }
   public static function create() {
-    View::make('credit/new.html');   
+    $persons = Person::all();
+    $topics = Topic::all();
+    View::make('credit/new.html', array('persons' => $persons, 'topics' => $topics));   
   }
   
   public static function store(){
     $params = $_POST;
+      
+    if(!isset($params['interrupted'])) {
+      $params['interrupted'] = null;
+    } 
+    
+    if(empty($params['enddate'])) {
+      $params['enddate'] = null;
+    }
+    
+    if(!is_numeric($params['grade'])) {
+      $params['grade'] = null;
+    }
+    
     $credit = new Credit(array(
       'givenby' => $params['givenby'],
       'topic' => $params['topic'],

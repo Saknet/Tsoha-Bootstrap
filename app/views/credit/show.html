@@ -6,10 +6,10 @@
     <button class="btn btn-danger">Poista</button> <a href="{{base_path}}/credit/edit/1" class="btn btn-info">Muokkaa</a>
   </p>
   <ul>
-    <li><strong>Aiheen nimi:</strong> {{credit.topic.name}}</li>
-    <li><strong>Vastuuhenkilöt:</strong> <a href="{{base_path}}/person/{{credit.givenby.id}}">{{credit.givenby.name}}</a></li>
+    <li><strong>Aiheen nimi:</strong><a href="{{base_path}}/topic/{{credit.topic.id}}"> {{credit.topic.name}}</a></li>
+    <li><strong>Vastuuhenkilöt:</strong><a href="{{base_path}}/person/{{credit.givenby.id}}"> {{credit.givenby.name}}</a></li>
     <li><strong>Aloituspäivämäärä:</strong> {{credit.startdate}}</li>
-    <li><strong>Hyväksytty (pvm):</strong> 
+    <li><strong>Hyväksytty (pvm): </strong> 
         {% if credit.interrupted %}
         Suoritus keskeytetty
         {% else %}

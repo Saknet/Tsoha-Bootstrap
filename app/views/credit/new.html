@@ -4,27 +4,34 @@
 
   <form method="post" action="{{base_path}}/credit">
     <div class="form-group">
-      <label>Arvioija</label>
-      <input type="text" name="givenby" class="form-control">
+      <label>Valitse arvioija</label>
+      <select name="givenby" class="form-control">
+        {% for person in persons %}
+        <option value="{{person.id}}">{{person.name}}</option>
+        {% endfor %}
+      </select>
     </div>
 
     <div class="form-group">
-      <label>Aihe</label>
-      <input type="text" name="topic" class="form-control">
+      <label>Valitse aihe</label>
+      <select name="topic" class="form-control">
+        {% for topic in topics %}
+        <option value="{{topic.id}}">{{topic.name}}</option>
+        {% endfor %}
+      </select>
     </div>
       
-    <div class="form-group">
-      <label>Keskeytetty</label>
-      <input type="checkbox" name="interrupted" class="form-control">
-    </div>
+    <div class="checkbox">
+      <label><input checked="checked" name="interrupted" type="checkbox" value="yes">Keskeytetty</label>
+    </div>     
 
     <div class="form-group">
-      <label>Aloituspäivämäärä</label>
+      <label>Anna harjoitustyön aloituspäivämäärä muodossa:vuosi-kk-päivä (esim. 2017-01-20)</label>
       <input type="text" name="startdate" class="form-control">
     </div>  
       
     <div class="form-group">
-      <label>Hyväksytty (pvm)</label>
+      <label>Anna harjoitustyön valmistumispäivämäärä muodossa:vuosi-kk-päivä (esim. 2017-03-12)</label>
       <input type="text" name="enddate" class="form-control">
     </div>
 

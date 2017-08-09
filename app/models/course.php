@@ -53,7 +53,8 @@ class Course extends BaseModel{
     foreach($rows as $row){
       $courses[] = new Course(array(
         'id' => $row['id'],
-        'name' => $row['name']
+        'name' => $row['name'],
+        'incharge' => Person::find($row['incharge'])  
       ));
     }
 

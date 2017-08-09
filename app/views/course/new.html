@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Lisää uuden kurssin tiedot järjestelmään</h1>
+  <h1>Lisää järjestelmään uuden kurssin tiedot </h1>
 
   <form method="post" action="{{base_path}}/course">
     <div class="form-group">
@@ -9,8 +9,12 @@
     </div>
 
     <div class="form-group">
-      <label>Vastuuhenkilö</label>
-      <input type="text" name="incharge" class="form-control">
+      <label>Valitse kurssin vastuuhenkilö</label>
+      <select name="incharge" class="form-control">
+        {% for person in persons %}
+        <option value="{{person.id}}"> {{person.name}}</option>
+        {% endfor %}
+      </select>
     </div>
 
     <div class="form-group">

@@ -60,6 +60,7 @@ class Topic extends BaseModel{
         'name' => $row['name'],
         'addedby' => Person::find($row['addedby']),
         'description' => $row['description'],
+        'course' => Course::find($row['course'])
       ));
     }
 
@@ -76,6 +77,7 @@ class Topic extends BaseModel{
       $topics[] = new Topic(array(
         'id' => $row['id'],
         'name' => $row['name'],
+        'addedby' => Person::find($row['addedby']),
         'description' => $row['description'],
         'course' => Course::find($row['course'])
       ));
@@ -85,7 +87,7 @@ class Topic extends BaseModel{
   }
   
   public function save(){
-    $query = DB::connection()->prepare('INSERT INTO Person (name, addedby, description, course) VALUES (:name, :addedby, :description, :course) RETURNING id');
+    $query = DB::connection()->prepare('INSERT INTO Topic (name, addedby, description, course) VALUES (:name, :addedby, :description, :course) RETURNING id');
     $query->execute(array('name' => $this->name, 'addedby' => $this->addedby, 'description' => $this->description, 'course' => $this->course));
     $row = $query->fetch();
     $this->id = $row['id'];
@@ -98,11 +100,11 @@ class Topic extends BaseModel{
     
     foreach($credits as $credit) {
         if ($credit->grade > 0) {
-            $sum =+ $credit->grade;
+            $sum = $sum + $credit->grade;
             $count++;
         }
     }
-    
+
     if ($count != 0) {
         return $sum / $count;   
     } else {
@@ -145,14 +147,14 @@ class Topic extends BaseModel{
         if ($credit->enddate > 0) {
             $end = $credit->enddate;
             $start = $credit->startdate;
-            $days_between = round((strtotime($end) - strtotime($start)) / 86400);
-            $sum =+ $days_between;
+            $days_between = (strtotime($end) - strtotime($start)) / 86400;
+            $sum = $sum + $days_between;
             $count++;
         }
     }
     
     if ($count != 0) {
-        return $sum / $count;   
+        return round($sum / $count);   
     } else {
         return 0;
     }
