@@ -28,7 +28,11 @@
         <tr>
           <td><a href="{{base_path}}/topic/{{topic.id}}">{{topic.name}}</a></td>
           <td>{{topic.description}}</td>
-          <td><a href="{{base_path}}/person/{{topic.addedby.id}}">{{topic.addedby.name}}</a></td>
+          <td>
+            {% for p in topic.person %}
+            <a href="{{base_path}}/person/{{p.id}}">{{p.name}} </a>
+            {% endfor %} 
+          </td>
         </tr>
         {% endfor %}
     </tbody>

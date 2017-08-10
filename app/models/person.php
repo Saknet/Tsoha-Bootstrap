@@ -48,6 +48,25 @@ class Person extends BaseModel{
     return null;
   }
   
+  public static function find_many_persons_with_topic_id($id) {
+    $query = DB::connection()->prepare('SELECT * FROM Person_Topic pt JOIN Topic t ON t.id = pt.topic JOIN Person p ON pt.person = p.id WHERE topic = :id');
+    $query->execute(array('id' => $id));
+    $rows = $query->fetchAll();
+    $persons = array();
+
+    foreach($rows as $row){
+      $persons[] = new Person(array(
+        'id' => $row['id'],
+        'name' => $row['name'],
+        'username' => $row['username'],
+        'password' => $row['password'],
+        'admin' => $row['admin']
+      ));
+    }
+
+    return $persons;   
+  }
+   
   public function save(){
     $query = DB::connection()->prepare('INSERT INTO Person (name, username, password) VALUES (:name, :username, :password) RETURNING id');
     $query->execute(array('name' => $this->name, 'username' => $this->username, 'password' => $this->password));

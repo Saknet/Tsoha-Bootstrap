@@ -10,7 +10,8 @@ class TopicController extends BaseController{
   public static function show($id) {
     $topic = Topic::find($id);
     $credits = Credit::find_by_topic($id);
-    View::make('topic/show.html', array('topic' => $topic, 'credits' => $credits));
+    $persons = Person::find_many_persons_with_topic_id($id);
+    View::make('topic/show.html', array('topic' => $topic, 'credits' => $credits, 'persons' => $persons));
   }
   
   public static function create() {
@@ -23,7 +24,7 @@ class TopicController extends BaseController{
     $params = $_POST;
     $topic = new Topic(array(
       'name' => $params['name'],
-      'addedby' => $params['addedby'],
+      'person' => $params['person'],
       'description' => $params['description'],
       'course' => $params['course']       
     ));

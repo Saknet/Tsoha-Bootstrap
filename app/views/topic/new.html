@@ -10,7 +10,7 @@
 
     <div class="form-group">
       <label>Valitse aiheen vastuuhenkilö</label>
-      <select name="addedby" class="form-control">
+      <select name="person" class="form-control">
         {% for person in persons %}
         <option value="{{person.id}}"> {{person.name}}</option>
         {% endfor %}

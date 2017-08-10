@@ -1,15 +1,27 @@
-INSERT INTO Person (name, username, password, admin) VALUES ('Ope1', 'ano', 'nyymi', TRUE);
-INSERT INTO Person (name, username, password) VALUES ('Ope2', 'nyymi', 'ano');
+INSERT INTO Person (name, username, password, admin) VALUES ('Ope 1', 'ano', 'nyymi', TRUE);
+INSERT INTO Person (name, username, password, admin) VALUES ('Ope 2', 'nyymi', 'ano', TRUE);
+INSERT INTO Person (name, username, password) VALUES ('Ope 3', 'Ope3', 'Ope3');
+INSERT INTO Person (name, username, password) VALUES ('Ope 4', 'Ope4', 'Ope4');
 
 INSERT INTO Course (name, incharge) VALUES ('Ohjelmointi', 1);
 INSERT INTO Course (name, incharge) VALUES ('Tietokantasovellus', 1);
 INSERT INTO Course (name, incharge) VALUES ('Tietorakenteet ja algoritmit', 2);
 
-INSERT INTO Topic (name, addedby, description, course) VALUES ('Shakki', 1, 'yksinkertainen shakki', 1);
-INSERT INTO Topic (name, addedby, description, course) VALUES ('Laivanupotus', 2, 'laivanupotus peli', 1);
-INSERT INTO Topic (name, addedby, description, course) VALUES ('Työaihekanta', 1, 'Harjoitustöiden aiheiden tietokanta', 2);
-INSERT INTO Topic (name, addedby, description, course) VALUES ('Drinkkiarkisto', 1, 'Tehtävänä on laatia www-sivulla toimiva drinkinhakulomake. Drinkkireseptit kuvaavat cocktaileja ja muita juomasekoituksia. Reseptejä voi hakea juoman nimeen liittyvällä hakusanalla tai jonkin tietyn osa-aineen mukaan. Resepteistä voi pyytää myös listan aakkosjärjestyksen, ainesosan tai juomalajin (alkudrinkki, cocktail, shotti,…) mukaan.', 2);
-INSERT INTO Topic (name, addedby, description, course) VALUES ('Tiedon tiivistys', 2, 'Tiedoston pakkausta eri algoritmeilla', 3);
+INSERT INTO Topic (name, description, course) VALUES ('Shakki', 'yksinkertainen shakki', 1);
+INSERT INTO Topic (name, description, course) VALUES ('Laivanupotus', 'laivanupotus peli', 1);
+INSERT INTO Topic (name, description, course) VALUES ('Työaihekanta', 'Harjoitustöiden aiheiden tietokanta', 2);
+INSERT INTO Topic (name, description, course) VALUES ('Drinkkiarkisto', 'Tehtävänä on laatia www-sivulla toimiva drinkinhakulomake. Drinkkireseptit kuvaavat cocktaileja ja muita juomasekoituksia. Reseptejä voi hakea juoman nimeen liittyvällä hakusanalla tai jonkin tietyn osa-aineen mukaan. Resepteistä voi pyytää myös listan aakkosjärjestyksen, ainesosan tai juomalajin (alkudrinkki, cocktail, shotti,…) mukaan.', 2);
+INSERT INTO Topic (name, description, course) VALUES ('Tiedon tiivistys', 'Tiedoston pakkausta eri algoritmeilla', 3);
+
+INSERT INTO PERSON_TOPIC (person, topic) VALUES (1, 1);
+INSERT INTO PERSON_TOPIC (person, topic) VALUES (2, 1);
+INSERT INTO PERSON_TOPIC (person, topic) VALUES (3, 1);
+INSERT INTO PERSON_TOPIC (person, topic) VALUES (4, 1);
+INSERT INTO PERSON_TOPIC (person, topic) VALUES (1, 2);
+INSERT INTO PERSON_TOPIC (person, topic) VALUES (2, 3);
+INSERT INTO PERSON_TOPIC (person, topic) VALUES (3, 4);
+INSERT INTO PERSON_TOPIC (person, topic) VALUES (4, 5);
+INSERT INTO PERSON_TOPIC (person, topic) VALUES (2, 4);
 
 INSERT INTO Credit (givenby, topic, interrupted, startdate, grade) VALUES (1, 2, TRUE, '2014-11-11', 0);
 INSERT INTO Credit (givenby, topic, interrupted, startdate, enddate, grade) VALUES (1, 1, FALSE, '2015-9-9', '2015-11-9', 5);

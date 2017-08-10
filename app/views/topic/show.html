@@ -7,7 +7,11 @@
   </p>
   <ul>
     <li><strong>Kurssin nimi:</strong> {{topic.name}}</li>
-    <li><strong>Vastuuhenkilöt:</strong> <a href="{{base_path}}/person/{{topic.addedby.id}}">{{topic.addedby.name}}</a></li>
+    <li><strong>Vastuuhenkilöt:</strong> 
+        {% for person in persons %}        
+        <a href="{{base_path}}/person/{{person.id}}"> {{person.name}}</a>
+        {% endfor %}
+    </li>
     <li><strong>Suoritettu yhteensä:</strong> {{topic.totalCredits}} kertaa</li>
     <li><strong>Keskeytetty yhteensä:</strong> {{topic.interrupted}} kertaa</li>
     <li><strong>Suorituksen keskimääräinen kesto:</strong> {{topic.averageTimeSpent}} päivää</li>
@@ -24,7 +28,7 @@
     <thead>
       <tr>
         <th>Linkki suoritukseen</th>
-        <th>Vastuuhenkilö</th>
+        <th>Vastuuhenkilöt</th>
         <th>Aloitettu</th>
         <th>Keskeytetty suoritus</th>
         <th>Valmis</th>

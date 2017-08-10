@@ -16,7 +16,6 @@ CREATE TABLE Course(
 CREATE TABLE Topic(
   id SERIAL PRIMARY KEY,
   name varchar(50) NOT NULL, 
-  addedby INTEGER REFERENCES Person(id),
   description varchar(500),
   course INTEGER REFERENCES Course(id)
 );
@@ -29,4 +28,9 @@ CREATE TABLE Credit(
   startDate DATE,
   endDate DATE,
   grade INTEGER
+);
+
+CREATE TABLE Person_Topic(
+  person INTEGER REFERENCES Person(id),
+  topic INTEGER REFERENCES Topic(id)
 );
