@@ -23,25 +23,24 @@ class CreditController extends BaseController{
     if(!isset($params['interrupted'])) {
       $params['interrupted'] = null;
     } 
-    
-    if(empty($params['enddate'])) {
-      $params['enddate'] = null;
-    }
-    
-    if(!is_numeric($params['grade'])) {
-      $params['grade'] = null;
-    }
-    
-    $credit = new Credit(array(
+      
+    $attributes = array(
       'givenby' => $params['givenby'],
       'topic' => $params['topic'],
       'interrupted' => $params['interrupted'],
       'startdate' => $params['startdate'],
       'enddate' => $params['enddate'],
       'grade' => $params['grade']                  
-    ));
+    );
 
-    $credit->save();
-    Redirect::to('/credit/' . $credit->id, array('message' => 'Suorituksen tiedot lisättiin järjestelmään!'));
+    $credit = new Credit($attributes);    
+    $errors = $credit->errors();
+
+    if(count($errors) == 0) {
+      $credit->save();
+      Redirect::to('/credit/' . $credit->id, array('message' => 'Suorituksen tiedot lisättiin järjestelmään!'));
+    } else {
+        View::make('credit/new.html', array('errors' => $errors, 'attributes' => $attributes));
+    }
   }
 }

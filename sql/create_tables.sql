@@ -2,7 +2,7 @@
 CREATE TABLE Person(
   id SERIAL PRIMARY KEY, 
   name varchar(50) NOT NULL, 
-  username varchar(50) NOT NULL,
+  username varchar(50) NOT NULL UNIQUE,
   password varchar(50) NOT NULL,
   admin boolean DEFAULT FALSE
 );

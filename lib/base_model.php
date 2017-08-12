@@ -21,9 +21,39 @@
 
       foreach($this->validators as $validator){
         // Kutsu validointimetodia tässä ja lisää sen palauttamat virheet errors-taulukkoon
+        $errors = array_merge($errors, $this->{$validator}());
       }
 
       return $errors;
     }
-
-  }
+    
+    public function validate_string_length($value, $string, $minLength, $maxLength) {
+      $errors = array();
+      
+      if($string == '' || $string == null){
+        $errors[] = $value . ' tulee olla ei tyhjä merkkijono!';
+      }
+      if(!is_string($string)) {
+        $errors[] = $value . ' tulee olla merkkijono.';
+      }
+      if(strlen($string) < $minLength) {
+        $errors[] = $value . ' pituuden tulee olla vähintään ' . $minLength . ' merkkiä!';
+      }
+      if(strlen($string) > $maxLength) {
+        $errors[] = $value . ' pituuden tulee olla enintään ' . $maxLength . ' merkkiä!';
+      }
+      return $errors;
+    }
+    
+    public function validate_date($value, $date) {
+        //todo
+    }
+    
+    public function validate_number($grade) {
+      $errors = array(); 
+        if($grade < 0 || $grade > 5){
+            $errors[] = 'Arvosanan tulee olla numero väliltä 0 - 5';
+      }
+      return $errors;
+    }
+}

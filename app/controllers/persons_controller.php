@@ -20,14 +20,21 @@ class PersonController extends BaseController{
   
   public static function store(){
     $params = $_POST;
-    $person = new Person(array(
+    $attributes = array(
       'name' => $params['name'],
       'username' => $params['username'],
       'password' => $params['password']
-    ));
+    );
     
-    $person->save();
-    Redirect::to('/person/' . $person->id, array('message' => 'Henkilön tiedot lisättiin tietokantaan!'));
+    $person = new Person($attributes);
+    $errors = $person->errors();
+    
+    if(count($errors) == 0) {
+      $person->save();
+      Redirect::to('/person/' . $person->id, array('message' => 'Henkilön tiedot lisättiin tietokantaan!'));
+    } else {
+        View::make('person/new.html', array('errors' => $errors, 'attributes' => $attributes));        
+    }
   }
 }
 

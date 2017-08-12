@@ -6,6 +6,7 @@ class Credit extends BaseModel{
 
   public function __construct($attributes){
     parent::__construct($attributes);
+    $this->validators = array('validate_startdate', 'validate_enddate', 'validate_grade');    
   }
 				
   public static function all(){
@@ -78,5 +79,17 @@ class Credit extends BaseModel{
     $query->execute(array('givenby' => $this->givenby, 'topic' => $this->topic, 'interrupted' => $this->interrupted, 'startdate' => $this->startdate, 'enddate' => $this->enddate, 'grade' => $this->grade));
     $row = $query->fetch();
     $this->id = $row['id'];
+  }
+  
+  public function validate_startdate() {
+    return $this->validate_date('Aloituspäivämäärän', $this->startdate);
+  }
+  
+  public function validate_enddate() {
+    return $this->validate_date('Lopetuspäivämäärän', $this->enddate);
+  }
+  
+  public function validate_grade() {
+      return $this->validate_number($this->grade);  
   }
 }

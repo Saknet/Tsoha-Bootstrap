@@ -27,17 +27,17 @@
 
     <div class="form-group">
       <label>Anna harjoitustyön aloituspäivämäärä muodossa:vuosi-kk-päivä (esim. 2017-01-20)</label>
-      <input type="text" name="startdate" class="form-control">
+      <input type="text" name="startdate" class="form-control" value="{% if attributes %}{{attributes.startdate}}{% endif %}">
     </div>  
       
     <div class="form-group">
       <label>Anna harjoitustyön valmistumispäivämäärä muodossa:vuosi-kk-päivä (esim. 2017-03-12)</label>
-      <input type="text" name="enddate" class="form-control">
+      <input type="text" name="enddate" class="form-control" value="{% if attributes %}{{attributes.enddate}}{% endif %}">
     </div>
 
     <div class="form-group">
       <label>Arvosana</label>
-      <input type="text" name="grade" class="form-control">
+      <input type="text" name="grade" class="form-control" value="{% if attributes %}{{attributes.grade}}{% endif %}">
     </div>        
 
     <div class="form-group">

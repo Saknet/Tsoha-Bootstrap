@@ -22,14 +22,21 @@ class TopicController extends BaseController{
   
   public static function store(){
     $params = $_POST;
-    $topic = new Topic(array(
+    $attributes = array(
       'name' => $params['name'],
       'person' => $params['person'],
       'description' => $params['description'],
       'course' => $params['course']       
-    ));
-       
-    $topic->save();
-    Redirect::to('/topic/' . $topic->id, array('message' => 'Aiheen tiedot lisättiin järjestelmään!'));
+    );
+    
+    $topic = new Topic($attributes);  
+    $errors = $topic->errors();
+    
+    if(count($errors) == 0) {
+      $topic->save();
+      Redirect::to('/topic/' . $topic->id, array('message' => 'Aiheen tiedot lisättiin järjestelmään!'));
+    } else {
+      View::make('topic/new.html', array('errors' => $errors, 'attributes' => $attributes));   
+    }
   }
 }

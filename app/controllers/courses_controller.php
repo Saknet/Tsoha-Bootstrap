@@ -20,12 +20,19 @@ class CourseController extends BaseController{
   
   public static function store(){
     $params = $_POST;
-    $course = new Course(array(
+    $attributes = array(
       'name' => $params['name'],
       'incharge' => $params['incharge']
-    ));
+    );
+    
+    $course = new Course($attributes);  
+    $errors = $course->errors();
 
-    $course->save();
-    Redirect::to('/course/' . $course->id, array('message' => 'Kurssin tiedot lisättiin järjestelmään!'));
+    if(count($errors) == 0) {
+      $course->save();
+      Redirect::to('/course/' . $course->id, array('message' => 'Kurssin tiedot lisättiin järjestelmään!'));
+    } else {
+      View::make('course/new.html', array('errors' => $errors, 'attributes' => $attributes));
+    }
   }
 }

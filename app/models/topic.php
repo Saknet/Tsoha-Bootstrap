@@ -6,6 +6,7 @@ class Topic extends BaseModel{
 
   public function __construct($attributes){
     parent::__construct($attributes);
+    $this->validators = array('validate_name', 'validate_description');   
   }
   
   public static function all(){
@@ -161,5 +162,13 @@ class Topic extends BaseModel{
     } else {
         return 0;
     }
-  }  
+  }
+  
+  public function validate_name() {
+    return $this->validate_string_length('Nimen', $this->name, 2, 50);
+  }
+  
+  public function validate_description() {
+    return $this->validate_string_length('Kuvauksen', $this->name, 4, 500);
+  }
 }
