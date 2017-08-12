@@ -46,13 +46,17 @@
     }
     
     public function validate_date($value, $date) {
-        //todo
+      $errors = array();
+      if (!($date == date('Y-m-d', strtotime($date)))) {
+        $errors[] = $value . ' tulee olla päivämäärä!';       
+      }
+      return $errors;
     }
     
     public function validate_number($grade) {
       $errors = array(); 
-        if($grade < 0 || $grade > 5){
-            $errors[] = 'Arvosanan tulee olla numero väliltä 0 - 5';
+        if(!is_numeric($grade) || $grade < 0 || $grade > 5){
+            $errors[] = 'Arvosanan tulee olla kokonaisluku väliltä 0 - 5';
       }
       return $errors;
     }
