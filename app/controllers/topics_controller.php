@@ -54,6 +54,7 @@ class TopicController extends BaseController{
     $attributes = array(
       'id' =>  $id,
       'name' => $params['name'],
+      'topic' => $id,
       'person' => $params['person'],
       'description' => $params['description'],
       'course' => $params['course']       

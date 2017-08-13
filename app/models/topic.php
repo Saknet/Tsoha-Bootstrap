@@ -101,12 +101,8 @@ class Topic extends BaseModel{
     $query = DB::connection()->prepare('UPDATE Topic SET name = :name, description = :description, course = :course WHERE id = :id');
     $query->execute(array('id' => $this->id, 'name' => $this->name, 'description' => $this->description, 'course' => $this->course));
     
-    $old = $query = DB::connection()->prepare('SELECT * FROM Person_Topic WHERE topic = :id AND person = :person');
-    
-    if (!$old) {
-        $query = DB::connection()->prepare('INSERT INTO Person_Topic (person, topic) VALUES (:person, :topic)');
-        $query->execute(array('person' => $this->person, 'topic' => $this->id));         
-    }
+    $query = DB::connection()->prepare('UPDATE Person_Topic SET person = :person WHERE topic = :topic');
+    $query->execute(array('person' => $this->person, 'topic' => $this->id));
   }
   
   public function destroy() {
