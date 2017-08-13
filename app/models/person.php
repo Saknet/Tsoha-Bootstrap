@@ -75,6 +75,16 @@ class Person extends BaseModel{
     $this->id = $row['id'];
   }
   
+  public function update() {
+    $query = DB::connection()->prepare('UPDATE Person SET name = :name, username = :username, password = :password, admin = :admin WHERE id = :id');
+    $query->execute(array('id' => $this->id, 'name' => $this->name, 'username' => $this->username, 'password' => $this->password, 'admin' => $this->admin));
+  }
+  
+  public function destroy() {
+    $query = DB::connection()->prepare('DELETE FROM Person WHERE id = :id');
+    $query->execute(array('id' => $this->id));
+  }
+  
   public function validate_name() {
     return $this->validate_string_length('Nimen', $this->name, 2, 50);
   }

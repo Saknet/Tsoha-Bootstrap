@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+  <h1>Muokkaa kurssin {{attributes.name}} tietoja</h1>
+
+  <form method="post" action="{{base_path}}/course/{{attributes.id}}/edit">
+    <div class="form-group">
+      <label>Kurssin koko nimi</label>
+      <input type="text" name="name" class="form-control" value="{{attributes.name}}">
+    </div>
+      
+    <div class="form-group">
+      <label>Valitse kurssin vastuuhenkilö</label>
+      <select name="incharge" class="form-control">
+        <option value= ""></option>
+        {% for person in persons %}
+        <option value="{{person.id}}"> {{person.name}}</option>
+        {% endfor %}
+      </select>
+    </div>
+      
+    <div class="form-group">
+      <button type="submit" class="btn btn-success">Tallenna</button>
+    </div>
+  </form>
+{% endblock %}

@@ -3,10 +3,13 @@
 
   <h1>{{topic.name}}</h1>
   <p>
-    <button class="btn btn-danger">Poista</button> <a href="{{base_path}}/topic/edit/1" class="btn btn-info">Muokkaa</a>
+    <form method="post" action="{{base_path}}/topic/{{topic.id}}/destroy" style="display: inline-block;">
+        <button type="submit" class="btn btn-danger">Poista</button>
+    </form> 
+    <a href="{{base_path}}/topic/{{topic.id}}/edit" class="btn btn-info">Muokkaa</a>
   </p>
   <ul>
-    <li><strong>Kurssin nimi:</strong> {{topic.name}}</li>
+      <li><strong>Kurssin nimi:</strong><a href="{{base_path}}/course/{{topic.course.id}}"> {{topic.course.name}}</a></li>
     <li><strong>Vastuuhenkilöt:</strong> 
         {% for person in persons %}        
         <a href="{{base_path}}/person/{{person.id}}"> {{person.name}}</a>

@@ -3,7 +3,10 @@
 
   <h1>Suoritus</h1>
   <p>
-    <button class="btn btn-danger">Poista</button> <a href="{{base_path}}/credit/edit/1" class="btn btn-info">Muokkaa</a>
+    <form method="post" action="{{base_path}}/credit/{{credit.id}}/destroy" style="display: inline-block;">
+        <button type="submit" class="btn btn-danger">Poista</button>
+    </form> 
+    <a href="{{base_path}}/credit/{{credit.id}}/edit" class="btn btn-info">Muokkaa</a>
   </p>
   <ul>
     <li><strong>Aiheen nimi:</strong><a href="{{base_path}}/topic/{{credit.topic.id}}"> {{credit.topic.name}}</a></li>

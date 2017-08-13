@@ -17,13 +17,13 @@ CREATE TABLE Topic(
   id SERIAL PRIMARY KEY,
   name varchar(50) NOT NULL, 
   description varchar(500),
-  course INTEGER REFERENCES Course(id)
+  course INTEGER REFERENCES Course(id) ON DELETE CASCADE
 );
 
 CREATE TABLE Credit(
   id SERIAL PRIMARY KEY, 
   givenBy INTEGER REFERENCES Person(id),
-  topic INTEGER REFERENCES Topic(id),
+  topic INTEGER REFERENCES Topic(id) ON DELETE CASCADE,
   interrupted boolean DEFAULT FALSE,
   startDate DATE,
   endDate DATE,
@@ -31,6 +31,6 @@ CREATE TABLE Credit(
 );
 
 CREATE TABLE Person_Topic(
-  person INTEGER REFERENCES Person(id),
-  topic INTEGER REFERENCES Topic(id)
+  person INTEGER REFERENCES Person(id) ON DELETE CASCADE,
+  topic INTEGER REFERENCES Topic(id) ON DELETE CASCADE
 );

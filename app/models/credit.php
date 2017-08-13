@@ -81,6 +81,16 @@ class Credit extends BaseModel{
     $this->id = $row['id'];
   }
   
+  public function update() {
+    $query = DB::connection()->prepare('UPDATE Credit SET givenby = :givenby, topic = :topic, interrupted = :interrupted, startdate = :startdate, enddate = :enddate, grade = :grade WHERE id = :id');
+    $query->execute(array('id' => $this->id, 'givenby' => $this->givenby, 'topic' => $this->topic, 'interrupted' => $this->interrupted, 'startdate' => $this->startdate, 'enddate' => $this->enddate, 'grade' => $this->grade));
+  }
+  
+  public function destroy() {
+    $query = DB::connection()->prepare('DELETE FROM Credit WHERE id = :id');
+    $query->execute(array('id' => $this->id));
+  }
+  
   public function validate_startdate() {
     return $this->validate_date('Aloituspäivämäärän', $this->startdate);
   }

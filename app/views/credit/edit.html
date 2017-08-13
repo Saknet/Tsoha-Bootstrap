@@ -2,33 +2,46 @@
 {% block content %}
   <h1>Muokkaa suoritusta</h1>
 
-  <form>
+  <form method="post" action="{{base_path}}/credit/{{attributes.id}}/edit">
     <div class="form-group">
-      <label>Aiheen nimi</label>
-      <input type="text" class="form-control" value="Shakki">
+      <label>Valitse arvioija</label>
+      <select name="givenby" class="form-control">
+        <option value= ""></option>  
+        {% for person in persons %}
+        <option value="{{person.id}}">{{person.name}}</option>
+        {% endfor %}
+      </select>
     </div>
+
     <div class="form-group">
-      <label>Vastuuhenkilöt</label>
-      <input type="text" class="form-control" value="Ope1">
+      <label>Valitse aihe</label>
+      <select name="topic" class="form-control">
+        <option value= ""></option>  
+        {% for topic in topics %}
+        <option value="{{topic.id}}">{{topic.name}}</option>
+        {% endfor %}
+      </select>
     </div>
-    <div class="form-group">
-      <label>Aloitettu</label>
-      <input type="text" class="form-control" value="2015-09-09">
-    </div>
+      
     <div class="checkbox">
-        <label>
-        <input type="checkbox"> 
-        Keskeytetty 
-        </label>
-    </div>  
+      <label><input name="interrupted" type="checkbox">Keskeytetty</label>
+    </div>     
+
     <div class="form-group">
-      <label>Valmis</label>
-      <input type="text" class="form-control" value="2015-11-09">
+      <label>Anna harjoitustyön aloituspäivämäärä muodossa:vuosi-kk-päivä (esim. 2017-01-20)</label>
+      <input type="text" name="startdate" class="form-control" value="{{attributes.startdate}}">
     </div>  
+      
+    <div class="form-group">
+      <label>Anna harjoitustyön valmistumispäivämäärä muodossa:vuosi-kk-päivä (esim. 2017-03-12)</label>
+      <input type="text" name="enddate" class="form-control" value="{{attributes.enddate}}">
+    </div>
+
     <div class="form-group">
       <label>Arvosana</label>
-      <input type="text" class="form-control" value="5">
-    </div>      
+      <input type="text" name="grade" class="form-control" value="{{attributes.grade}}">
+    </div>          
+      
     <div class="form-group">
       <button type="submit" class="btn btn-success">Tallenna</button>
     </div>

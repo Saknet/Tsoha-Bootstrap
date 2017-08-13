@@ -69,6 +69,16 @@ class Course extends BaseModel{
     $this->id = $row['id'];
   }
   
+  public function update() {
+    $query = DB::connection()->prepare('UPDATE Course SET name = :name, incharge = :incharge WHERE id = :id');
+    $query->execute(array('id' => $this->id, 'name' => $this->name, 'incharge' => $this->incharge));
+  }
+  
+  public function destroy() {
+    $query = DB::connection()->prepare('DELETE FROM Course WHERE id = :id');
+    $query->execute(array('id' => $this->id));
+  }  
+  
   public function validate_name() {
     return $this->validate_string_length('Nimen', $this->name, 2, 50);
   }  

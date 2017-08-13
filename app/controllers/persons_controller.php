@@ -18,8 +18,9 @@ class PersonController extends BaseController{
     View::make('person/new.html');   
   }
   
-  public static function store(){
+  public static function store() {
     $params = $_POST;
+    
     $attributes = array(
       'name' => $params['name'],
       'username' => $params['username'],
@@ -36,5 +37,43 @@ class PersonController extends BaseController{
         View::make('person/new.html', array('errors' => $errors, 'attributes' => $attributes));        
     }
   }
-}
+  
+  public static function edit($id) {
+    $person = Person::find($id);
+    View::make('person/edit.html', array('attributes' => $person));
+  }
 
+  public static function update($id) {
+    $params = $_POST;
+    
+    if(!isset($params['admin'])) {
+      $params['admin'] = null;
+    }
+
+    $attributes = array(
+      'id' =>  $id,
+      'name' => $params['name'],
+      'username' => $params['username'],
+      'password' => $params['password'],
+      'admin' => $params['admin']
+    );
+
+    $person = new Person($attributes);
+    $errors = $person->errors();
+
+    if(count($errors) > 0){
+      View::make('person/edit.html', array('errors' => $errors, 'attributes' => $attributes));
+    }else{
+      $person->update();
+
+      Redirect::to('/person/' . $person->id, array('message' => 'Henkilön tietoja muokattiin onnistuneesti!'));
+    }
+  }
+
+  public static function destroy($id) {
+    $person = new Person(array('id' => $id));
+    $person->destroy();
+
+    Redirect::to('/person', array('message' => 'Henkiön tiedot poistettiin onnistuneesti!'));
+  } 
+}

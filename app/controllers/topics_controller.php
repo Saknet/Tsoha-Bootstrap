@@ -2,7 +2,7 @@
 
 class TopicController extends BaseController{
     
-  public static function index(){
+  public static function index() {
     $topics = Topic::all();
     View::make('topic/index.html', array('topics' => $topics));
   }
@@ -20,8 +20,9 @@ class TopicController extends BaseController{
     View::make('topic/new.html', array('persons' => $persons, 'courses' => $courses));   
   }
   
-  public static function store(){
+  public static function store() {
     $params = $_POST;
+    
     $attributes = array(
       'name' => $params['name'],
       'person' => $params['person'],
@@ -39,4 +40,41 @@ class TopicController extends BaseController{
       View::make('topic/new.html', array('errors' => $errors, 'attributes' => $attributes));   
     }
   }
+  
+  public static function edit($id) {
+    $persons = Person::all();
+    $courses = Course::all();
+    $topic = Topic::find($id);
+    View::make('topic/edit.html', array('attributes' => $topic, 'persons' => $persons, 'courses' => $courses));
+  }
+  
+  public static function update($id) {
+    $params = $_POST;
+    
+    $attributes = array(
+      'id' =>  $id,
+      'name' => $params['name'],
+      'person' => $params['person'],
+      'description' => $params['description'],
+      'course' => $params['course']       
+    );
+
+    $topic = new Topic($attributes);
+    $errors = $topic->errors();
+
+    if(count($errors) > 0){
+      View::make('topic/edit.html', array('errors' => $errors, 'attributes' => $attributes));
+    }else{
+      $topic->update();
+
+      Redirect::to('/topic/' . $topic->id, array('message' => 'Aiheen tietoja muokattiin onnistuneesti!'));
+    }
+  }
+
+  public static function destroy($id) {
+    $topic = new Topic(array('id' => $id));
+    $topic->destroy();
+
+    Redirect::to('/topic', array('message' => 'Aihe poistettiin onnistuneesti!'));
+  }  
 }

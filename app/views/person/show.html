@@ -3,7 +3,10 @@
 
 <h1>{{person.name}}</h1>
   <p>
-    <button class="btn btn-danger">Poista</button> <a href="{{base_path}}/person/edit/1" class="btn btn-info">Muokkaa</a>
+    <form method="post" action="{{base_path}}/person/{{person.id}}/destroy" style="display: inline-block;">
+        <button type="submit" class="btn btn-danger">Poista</button>
+    </form> 
+    <a href="{{base_path}}/person/{{person.id}}/edit" class="btn btn-info">Muokkaa</a>
   </p>
   <ul>
     <li><strong>Käyttäjän nimi:</strong> {{person.name}}</li>

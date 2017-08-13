@@ -1,22 +1,27 @@
 {% extends "base.html" %}
 {% block content %}
-  <h1>Muokkaa käyttäjän tietoja</h1>
+  <h1>Muokkaa käyttäjän {{attributes.name}} tietoja</h1> 
 
-  <form>
+  <form method="post" action="{{base_path}}/person/{{attributes.id}}/edit">
     <div class="form-group">
-      <label>Käyttäjä nimi</label>
-      <input type="text" class="form-control" value="Ope1">
+      <label>Käyttäjä koko nimi</label>
+      <input type="text" name="name" class="form-control" value="{{attributes.name}}">
     </div>
+      
     <div class="form-group">
-      <label>Käyttäjä salasana</label>
-      <input type="text" class="form-control" value="Ope1">
+      <label>Käyttäjätunnus</label>
+      <input type="text" name="username" class="form-control" value="{{attributes.username}}">
+    </div>
+
+    <div class="form-group">
+      <label>Salasana</label>
+      <input type="text" name="password" class="form-control" value="">
     </div>  
+      
     <div class="checkbox">
-        <label>
-        <input type="checkbox" checked="checked"> 
-        Ylläpitäjä 
-        </label>
-    </div>        
+      <label><input name="admin" type="checkbox">Ylläpitäjä</label>
+    </div> 
+      
     <div class="form-group">
       <button type="submit" class="btn btn-success">Tallenna</button>
     </div>

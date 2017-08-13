@@ -2,7 +2,7 @@
 
 class CourseController extends BaseController{
     
-  public static function index(){
+  public static function index() {
     $courses = Course::all();
     View::make('course/index.html', array('courses' => $courses));
   }
@@ -18,8 +18,9 @@ class CourseController extends BaseController{
     View::make('course/new.html', array('persons' => $persons));   
   }
   
-  public static function store(){
+  public static function store() {
     $params = $_POST;
+    
     $attributes = array(
       'name' => $params['name'],
       'incharge' => $params['incharge']
@@ -35,4 +36,38 @@ class CourseController extends BaseController{
       View::make('course/new.html', array('errors' => $errors, 'attributes' => $attributes));
     }
   }
+  
+  public static function edit($id) {
+    $course = Course::find($id);
+    $persons = Person::all();
+    View::make('course/edit.html', array('attributes' => $course, 'persons' => $persons));
+  }
+  
+  public static function update($id) {
+    $params = $_POST;
+    
+    $attributes = array(
+      'id' =>  $id,
+      'name' => $params['name'],
+      'incharge' => $params['incharge']
+    ); 
+
+    $course = new Course($attributes);
+    $errors = $course->errors();
+
+    if(count($errors) > 0){
+      View::make('course/edit.html', array('errors' => $errors, 'attributes' => $attributes));
+    }else{
+      $course->update();
+
+      Redirect::to('/course/' . $course->id, array('message' => 'Kurssin tietoja muokattiin onnistuneesti!'));
+    }
+  }
+
+  public static function destroy($id) {
+    $course = new Course(array('id' => $id));
+    $course->destroy();
+
+    Redirect::to('/course', array('message' => 'Kurssi poistettiin onnistuneesti!'));
+  }  
 }
