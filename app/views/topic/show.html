@@ -1,12 +1,11 @@
 {% extends "base.html" %}
 {% block content %}
+{% import "macros/forms.html" as forms %}
 
   <h1>{{topic.name}}</h1>
   <p>
-    <form method="post" action="{{base_path}}/topic/{{topic.id}}/destroy" style="display: inline-block;">
-        <button type="submit" class="btn btn-danger">Poista</button>
-    </form> 
-    <a href="{{base_path}}/topic/{{topic.id}}/edit" class="btn btn-info">Muokkaa</a>
+    {{forms.destroy_button("#{base_path}/topic/#{topic.id}/destroy")}}
+    {{forms.edit_link("#{base_path}/topic/#{topic.id}/edit")}}
   </p>
   <ul>
       <li><strong>Kurssin nimi:</strong><a href="{{base_path}}/course/{{topic.course.id}}"> {{topic.course.name}}</a></li>

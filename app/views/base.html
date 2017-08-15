@@ -39,12 +39,21 @@
         <div class="collapse navbar-collapse" id="navigation">
           <ul class="nav navbar-nav">
             <!-- Navigaation linkit -->
-            <li><a href="{{base_path}}">Etusivu</a></li>
             <li><a href="{{base_path}}/topic">Aiheet</a></li>
             <li><a href="{{base_path}}/credit">Suoritukset</a></li>
             <li><a href="{{base_path}}/course">Kurssit</a></li>
             <li><a href="{{base_path}}/person">Vastuuhenkilöt</a></li>
           </ul>
+            
+          {% if user_logged_in %}
+          <form class="navbar-form navbar-right" method="post" action="{{base_path}}/logout">
+            <button type="submit" class="btn btn-primary">Kirjaudu ulos</button>
+          </form>  
+          {% else %}
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="{{base_path}}/login">Kirjaudu sisään</a></li>
+          </ul>
+        {% endif %}  
         </div>
       </div>
     </nav>
@@ -59,6 +68,7 @@
         </ul>
       </div>
       {% endif %} 
+      
       {% if message %}
       <div class="alert-success">
         {{message}}

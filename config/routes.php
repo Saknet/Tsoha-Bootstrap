@@ -1,7 +1,11 @@
 <?php
 
   $routes->get('/', function() {
-    HelloWorldController::login();
+    PersonController::login();
+  });
+  
+  $routes->post('/logout', function(){
+    PersonController::logout();
   });
 
   $routes->get('/hiekkalaatikko', function() {
@@ -121,5 +125,9 @@
   });
 
   $routes->get('/login', function() {
-    HelloWorldController::login();
+    PersonController::login();
+  });
+  
+  $routes->post('/login', function() {
+    PersonController::handle_login();
   });

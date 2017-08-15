@@ -20,7 +20,7 @@ class CreditController extends BaseController{
   public static function store() {
     $params = $_POST;
       
-    if(!isset($params['interrupted'])) {
+    if (!isset($params['interrupted'])) {
       $params['interrupted'] = null;
     } 
       
@@ -36,7 +36,7 @@ class CreditController extends BaseController{
     $credit = new Credit($attributes);    
     $errors = $credit->errors();
 
-    if(count($errors) == 0) {
+    if (count($errors) == 0) {
       $credit->save();
       Redirect::to('/credit/' . $credit->id, array('message' => 'Suorituksen tiedot lisättiin järjestelmään!'));
     } else {
@@ -54,7 +54,7 @@ class CreditController extends BaseController{
   public static function update($id) {
     $params = $_POST;
     
-    if(!isset($params['interrupted'])) {
+    if (!isset($params['interrupted'])) {
       $params['interrupted'] = null;
     }
     
@@ -71,9 +71,9 @@ class CreditController extends BaseController{
     $credit = new Credit($attributes);
     $errors = $credit->errors();
 
-    if(count($errors) > 0){
+    if (count($errors) > 0){
       View::make('credit/edit.html', array('errors' => $errors, 'attributes' => $attributes));
-    }else{
+    } else {
       $credit->update();
 
       Redirect::to('/credit/' . $credit->id, array('message' => 'Suorituksen tietoja muokattiin onnistuneesti!'));

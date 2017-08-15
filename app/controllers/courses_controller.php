@@ -29,7 +29,7 @@ class CourseController extends BaseController{
     $course = new Course($attributes);  
     $errors = $course->errors();
 
-    if(count($errors) == 0) {
+    if (count($errors) == 0) {
       $course->save();
       Redirect::to('/course/' . $course->id, array('message' => 'Kurssin tiedot lisättiin järjestelmään!'));
     } else {
@@ -55,9 +55,9 @@ class CourseController extends BaseController{
     $course = new Course($attributes);
     $errors = $course->errors();
 
-    if(count($errors) > 0){
+    if (count($errors) > 0){
       View::make('course/edit.html', array('errors' => $errors, 'attributes' => $attributes));
-    }else{
+    } else {
       $course->update();
 
       Redirect::to('/course/' . $course->id, array('message' => 'Kurssin tietoja muokattiin onnistuneesti!'));

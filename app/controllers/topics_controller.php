@@ -33,7 +33,7 @@ class TopicController extends BaseController{
     $topic = new Topic($attributes);  
     $errors = $topic->errors();
     
-    if(count($errors) == 0) {
+    if (count($errors) == 0) {
       $topic->save();
       Redirect::to('/topic/' . $topic->id, array('message' => 'Aiheen tiedot lisättiin järjestelmään!'));
     } else {
@@ -63,9 +63,9 @@ class TopicController extends BaseController{
     $topic = new Topic($attributes);
     $errors = $topic->errors();
 
-    if(count($errors) > 0){
+    if (count($errors) > 0){
       View::make('topic/edit.html', array('errors' => $errors, 'attributes' => $attributes));
-    }else{
+    } else {
       $topic->update();
 
       Redirect::to('/topic/' . $topic->id, array('message' => 'Aiheen tietoja muokattiin onnistuneesti!'));

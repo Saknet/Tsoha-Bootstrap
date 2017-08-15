@@ -30,7 +30,7 @@ class PersonController extends BaseController{
     $person = new Person($attributes);
     $errors = $person->errors();
     
-    if(count($errors) == 0) {
+    if (count($errors) == 0) {
       $person->save();
       Redirect::to('/person/' . $person->id, array('message' => 'Henkilön tiedot lisättiin tietokantaan!'));
     } else {
@@ -61,9 +61,9 @@ class PersonController extends BaseController{
     $person = new Person($attributes);
     $errors = $person->errors();
 
-    if(count($errors) > 0){
+    if (count($errors) > 0){
       View::make('person/edit.html', array('errors' => $errors, 'attributes' => $attributes));
-    }else{
+    } else {
       $person->update();
 
       Redirect::to('/person/' . $person->id, array('message' => 'Henkilön tietoja muokattiin onnistuneesti!'));
@@ -76,4 +76,27 @@ class PersonController extends BaseController{
 
     Redirect::to('/person', array('message' => 'Henkiön tiedot poistettiin onnistuneesti!'));
   } 
+  
+  public static function login(){
+      View::make('person/login.html');
+  }
+  
+  public static function handle_login(){
+    $params = $_POST;
+
+    $person = Person::authenticate($params['username'], $params['password']);
+
+    if (!$person){
+      View::make('person/login.html', array('message' => 'Väärä käyttäjätunnus tai salasana!', 'username' => $params['username']));
+    } else {
+      $_SESSION['user'] = $person->id;
+
+      Redirect::to('/', array('message' => 'Tervetuloa takaisin ' . $person->name . '!'));
+    }
+  }
+  
+  public static function logout() {
+    $_SESSION['user'] = null;
+    Redirect::to('/login', array('message' => 'Uloskirjautuminen tapahtui onnistuneesti!'));
+  }
 }

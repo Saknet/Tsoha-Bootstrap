@@ -10,7 +10,7 @@
 
     <div class="form-group">
       <label>Valitse aiheen vastuuhenkilö</label>
-      <select name="person" class="form-control">
+      <select class="form-control" name="person">
         <option value= ""></option>                      
         {% for person in persons %}
         <option value="{{person.id}}"> {{person.name}}</option>
@@ -18,14 +18,14 @@
       </select>
     </div>
 
-    <div class="form-group">
+     <div class="form-group">
       <label>Aiheen kuvaus</label>
       <input type="text" name="description" class="form-control" value="{% if attributes %}{{attributes.description}}{% endif %}">
     </div>  
       
     <div class="form-group">
       <label>Valitse aiheen kurssi</label>
-      <select name="course" class="form-control">
+      <select class="form-control" name="course">
         <option value= ""></option>                      
         {% for course in courses %}
         <option value="{{course.id}}"> {{course.name}}</option>

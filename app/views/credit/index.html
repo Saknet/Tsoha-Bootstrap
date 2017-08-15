@@ -2,10 +2,12 @@
 {% block content %}
   <h1>Kaikki harjoitustöiden suoritukset</h1>
 
+  {% if user_logged_in %}
   <p>
     <a href="{{base_path}}/credit/new" class="btn btn-success">Lisää suoritus</a>
   </p>
-
+  {% endif %}
+   
   <table class="table table-striped table-bordered">
     <thead>
       <tr>
@@ -36,7 +38,7 @@
         </td>
         <td>{{credit.enddate}}</td>
         <td>{{credit.grade}}</td>
-        <th><a class="btn btn-info btn-sm" href="{{base_path}}/credit/{{credit.id}}/edit">Muokkaa</a></th>
+        <td><a class="btn btn-info btn-sm" href="{{base_path}}/credit/{{credit.id}}/edit">Muokkaa</a></td>
       </tr
       {% endfor %}
     </tbody>

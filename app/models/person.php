@@ -85,6 +85,27 @@ class Person extends BaseModel{
     $query->execute(array('id' => $this->id));
   }
   
+  public static function authenticate($username, $password) {
+    $query = DB::connection()->prepare('SELECT * FROM Person WHERE username = :username LIMIT 1');
+    $query->execute(array('username' => $username));
+    $row = $query->fetch();
+    
+    if($row && $password == $row['password']) {
+      $person = new Person(array(
+      'id' => $row['id'],
+      'name' => $row['name'],
+      'username' => $row['username'],
+      'password' => $row['password'],
+      'admin' => $row['admin']
+    ));
+    
+    return $person;
+    
+    } else {
+      return null;
+    }
+  }  
+  
   public function validate_name() {
     return $this->validate_string_length('Nimen', $this->name, 2, 50);
   }
