@@ -32,7 +32,9 @@ Yleisiä linkkejä:
 ## Kirjautuminen
 
 Käyttäjätunnnus - Salasana
+
 Ohja 		- aja		(ylläpitäjän oikeudet)
+
 Ope3		- Ope3		(tavallisen käyttäjän oikeudet)
 
 
