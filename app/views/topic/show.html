@@ -3,10 +3,14 @@
 {% import "macros/forms.html" as forms %}
 
   <h1>{{topic.name}}</h1>
+  
+  {% if user_logged_in %}
   <p>
     {{forms.destroy_button("#{base_path}/topic/#{topic.id}/destroy")}}
     {{forms.edit_link("#{base_path}/topic/#{topic.id}/edit")}}
   </p>
+  {% endif %}
+  
   <ul>
       <li><strong>Kurssin nimi:</strong><a href="{{base_path}}/course/{{topic.course.id}}"> {{topic.course.name}}</a></li>
     <li><strong>Vastuuhenkilöt:</strong> 

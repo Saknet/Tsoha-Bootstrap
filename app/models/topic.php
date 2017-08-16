@@ -2,11 +2,11 @@
 
 class Topic extends BaseModel{
 
-  public $id, $name, $person, $description, $course;
+  public $id, $name, $persons, $description, $course;
 
   public function __construct($attributes){
     parent::__construct($attributes);
-    $this->validators = array('validate_name', 'validate_description');   
+    $this->validators = array('validate_name', 'validate_description', 'validate_persons');   
   }
   
   public static function all(){
@@ -20,7 +20,7 @@ class Topic extends BaseModel{
       $topics[] = new Topic(array(
         'id' => $row['id'],
         'name' => $row['name'],
-        'person' => Person::find_many_persons_with_topic_id($row['id']),
+        'persons' => Person::find_many_persons_with_topic_id($row['id']),
         'description' => $row['description'],
         'course' => Course::find($row['course'])
       ));
@@ -38,7 +38,7 @@ class Topic extends BaseModel{
       $topic = new Topic(array(
         'id' => $row['id'],
         'name' => $row['name'],
-        'person' => Person::find_many_persons_with_topic_id($row['id']),
+        'persons' => Person::find_many_persons_with_topic_id($row['id']),
         'description' => $row['description'],
         'course' => Course::find($row['course'])
       ));
@@ -60,7 +60,7 @@ class Topic extends BaseModel{
         'id' => $row['id'],
         'name' => $row['name'],
         'description' => $row['description'],
-        'person' => Person::find_many_persons_with_topic_id($row['id']),  
+        'persons' => Person::find_many_persons_with_topic_id($row['id']),  
         'course' => Course::find($row['course'])
       ));
     }
@@ -94,15 +94,24 @@ class Topic extends BaseModel{
     $this->id = $row['id'];
     
     $query = DB::connection()->prepare('INSERT INTO Person_Topic (person, topic) VALUES (:person, :topic)');
-    $query->execute(array('person' => $this->person, 'topic' => $this->id));  
+    
+    foreach ($this->persons as $person) {
+      $query->execute(array('person' => $person, 'topic' => $this->id)); 
+    } 
   }
   
   public function update() {
     $query = DB::connection()->prepare('UPDATE Topic SET name = :name, description = :description, course = :course WHERE id = :id');
     $query->execute(array('id' => $this->id, 'name' => $this->name, 'description' => $this->description, 'course' => $this->course));
     
-    $query = DB::connection()->prepare('UPDATE Person_Topic SET person = :person WHERE topic = :topic');
-    $query->execute(array('person' => $this->person, 'topic' => $this->id));
+    $query = DB::connection()->prepare('DELETE FROM Person_Topic WHERE topic = :topic');
+    $query->execute(array('topic' => $this->id));
+    
+    $query = DB::connection()->prepare('INSERT INTO Person_Topic (person, topic) VALUES (:person, :topic)');
+    
+    foreach ($this->persons as $person) {
+      $query->execute(array('person' => $person, 'topic' => $this->id)); 
+    }
   }
   
   public function destroy() {
@@ -182,6 +191,10 @@ class Topic extends BaseModel{
   }
   
   public function validate_description() {
-    return $this->validate_string_length('Kuvauksen', $this->name, 4, 500);
+    return $this->validate_string_length('Kuvauksen', $this->description, 4, 500);
+  }
+  
+  public function validate_persons() {
+    return $this->validate_topic_persons($this->persons);  
   }
 }

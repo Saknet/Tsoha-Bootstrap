@@ -23,9 +23,13 @@ class TopicController extends BaseController{
   public static function store() {
     $params = $_POST;
     
+    if(!isset($params['persons'])) {
+      $params['persons'] = null;
+    }
+    
     $attributes = array(
       'name' => $params['name'],
-      'person' => $params['person'],
+      'persons' => $params['persons'],
       'description' => $params['description'],
       'course' => $params['course']       
     );
@@ -51,11 +55,15 @@ class TopicController extends BaseController{
   public static function update($id) {
     $params = $_POST;
     
+    if(!isset($params['persons'])) {
+      $params['persons'] = null;
+    }
+    
     $attributes = array(
       'id' =>  $id,
       'name' => $params['name'],
       'topic' => $id,
-      'person' => $params['person'],
+      'persons' => $params['persons'],
       'description' => $params['description'],
       'course' => $params['course']       
     );

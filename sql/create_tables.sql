@@ -23,7 +23,7 @@ CREATE TABLE Topic(
 CREATE TABLE Credit(
   id SERIAL PRIMARY KEY, 
   givenBy INTEGER REFERENCES Person(id),
-  topic INTEGER REFERENCES Topic(id) ON DELETE CASCADE,
+  topic INTEGER REFERENCES Topic(id),
   interrupted boolean DEFAULT FALSE,
   startDate DATE,
   endDate DATE,

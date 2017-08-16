@@ -56,7 +56,15 @@
     public function validate_number($grade) {
       $errors = array(); 
         if(!is_numeric($grade) || $grade < 0 || $grade > 5){
-            $errors[] = 'Arvosanan tulee olla kokonaisluku väliltä 0 - 5';
+          $errors[] = 'Arvosanan tulee olla kokonaisluku väliltä 0 - 5';
+      }
+      return $errors;
+    }
+    
+    public function validate_topic_persons($persons) {
+      $errors = array();
+      if ($persons == null) {
+          $errors[] = 'Aiheella tulee olla vähintään yksi vastuunhenkilö';      
       }
       return $errors;
     }

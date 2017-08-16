@@ -1,5 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
+{% import "macros/forms.html" as forms %}
+
   <h1>Kaikki harjoitustöiden aiheet</h1>
   
   {% if user_logged_in %}
@@ -15,7 +17,9 @@
         <th>Aiheen kuvaus</th>
         <th>Kurssin nimi</th>
         <th>Vastuuhenkilöt</th>
-        <th></th>
+        {% if user_logged_in %}
+        <th>Muokaa aihetta</th>
+        {% endif %}
       </tr>
     </thead>
 
@@ -26,11 +30,13 @@
         <td>{{topic.description}}</td>
         <td><a href="{{base_path}}/course/{{topic.course.id}}">{{topic.course.name}}</a></td>
         <td>
-            {% for p in topic.person %}
+            {% for p in topic.persons %}
             <a href="{{base_path}}/person/{{p.id}}">{{p.name}} </a>
             {% endfor %}    
-        </td>       
-        <td><a class="btn btn-info btn-sm" href="{{base_path}}/topic/{{topic.id}}/edit">Muokkaa</a></td>
+        </td>   
+        {% if user_logged_in %}
+        <td>{{forms.edit_link("#{base_path}/topic/#{topic.id}/edit")}}</td>
+        {% endif %}
       </tr>
       {% endfor %}
     </tbody>

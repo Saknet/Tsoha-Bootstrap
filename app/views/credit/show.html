@@ -3,10 +3,14 @@
 {% import "macros/forms.html" as forms %}
 
   <h1>Suoritus</h1>
+  
+  {% if user_logged_in %}
   <p>
     {{forms.destroy_button("#{base_path}/credit/#{credit.id}/destroy")}}
     {{forms.edit_link("#{base_path}/credit/#{credit.id}/edit")}}
   </p>
+  {% endif %}
+  
   <ul>
     <li><strong>Aiheen nimi:</strong><a href="{{base_path}}/topic/{{credit.topic.id}}"> {{credit.topic.name}}</a></li>
     <li><strong>Vastuuhenkilö:</strong><a href="{{base_path}}/person/{{credit.givenby.id}}"> {{credit.givenby.name}}</a></li>

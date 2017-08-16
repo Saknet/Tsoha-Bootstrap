@@ -3,10 +3,14 @@
 {% import "macros/forms.html" as forms %}
 
 <h1>{{person.name}}</h1>
+
+  {% if user_logged_in.admin %}
   <p>
     {{forms.destroy_button("#{base_path}/person/#{person.id}/destroy")}}
     {{forms.edit_link("#{base_path}/person/#{person.id}/edit")}}
   </p>
+ {% endif %}
+ 
   <ul>
     <li><strong>Käyttäjän nimi:</strong> {{person.name}}</li>
     <li><strong>Ylläpitäjä:</strong>

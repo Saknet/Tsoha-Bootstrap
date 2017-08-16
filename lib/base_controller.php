@@ -22,4 +22,8 @@
       $person = Person::find($_SESSION['user']);
       return $person->admin;
     }
+    
+    public static function get_is_admin() {
+      return is_admin();
+    }
   }

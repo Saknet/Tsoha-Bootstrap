@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
+{% import "macros/forms.html" as forms %}
+
   <h1>Kurssit</h1>
 
-  {% if user_logged_in %}
+  {% if user_logged_in.admin %}
   <p>
     <a href="{{base_path}}/course/new" class="btn btn-success">Lisää kurssi</a>
   </p>
@@ -13,7 +15,9 @@
           <tr>
               <th>Kurssin nimi</th>
               <th>Vastuuhenkilö</th>
-              <th></th>
+              {% if user_logged_in %}
+              <th>Muokkaa kurssia</th>
+              {% endif %}
           </tr>
       </thead>
       
@@ -22,7 +26,9 @@
           <tr>
               <td><a href="{{base_path}}/course/{{course.id}}">{{course.name}}</a></td>
               <td><a href="{{base_path}}/person/{{course.incharge.id}}">{{course.incharge.name}}</a></td>
-              <td><a class="btn btn-info btn-sm" href="{{base_path}}/course/{{course.id}}/edit">Muokkaa</a></td>
+              {% if user_logged_in %}
+              <td>{{forms.edit_link("#{base_path}/course/#{course.id}/edit")}}</td>
+              {% endif %}
           </tr>
           {% endfor %}
     </tbody>

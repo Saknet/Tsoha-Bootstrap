@@ -1,8 +1,10 @@
 {% extends "base.html" %}
 {% block content %}
+{% import "macros/forms.html" as forms %}
+
   <h1>Henkilöt</h1>
 
-  {% if user_logged_in %}
+  {% if user_logged_in.admin %}
   <p>
     <a href="{{base_path}}/person/new" class="btn btn-success">Lisää käyttäjä</a>
   </p>
@@ -13,7 +15,9 @@
         <tr>
             <th>Käyttäjän nimi</th>
             <th>Ylläpitäjä</th>
-            <th></th>
+            {% if user_logged_in.admin %}
+            <th>Muokaa henkilön tietoja</th>
+            {% endif %}
         </tr>
     </thead>
 
@@ -27,8 +31,10 @@
                 {% else %}
                 Ei
                 {% endif %}
-            </td>
-            <td><a class="btn btn-info btn-sm" href="{{base_path}}/person/{{person.id}}/edit">Muokkaa</a></td>
+            </td>           
+            {% if user_logged_in.admin %}
+            <td>{{forms.edit_link("#{base_path}/person/#{person.id}/edit")}}</td>
+            {% endif %}
         </tr>
         {% endfor %}
     </tbody>
