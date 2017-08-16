@@ -29,5 +29,10 @@ Yleisiä linkkejä:
 [Kurssin muokkaussivu](http://andra.users.cs.helsinki.fi/tsoha/course/edit/1)
 [Kurssin esittelysivu](http://andra.users.cs.helsinki.fi/tsoha/course/1)
 
+## Kirjautuminen
+
+Käyttäjätunnnus - Salasana
+Ohja 		- aja		(ylläpitäjän oikeudet)
+Ope3		- Ope3		(tavallisen käyttäjän oikeudet)
 
 
