@@ -22,7 +22,17 @@ class CreditController extends BaseController{
       
     if (!isset($params['interrupted'])) {
       $params['interrupted'] = null;
-    } 
+    } else {
+      $params['grade'] = 0;  
+    }
+    
+    if(!isset($params['givenby'])) {
+      $params['givenby'] = null;
+    }
+    
+    if(!isset($params['topic'])) {
+      $params['topic'] = null;
+    }
       
     $attributes = array(
       'givenby' => $params['givenby'],
@@ -40,7 +50,9 @@ class CreditController extends BaseController{
       $credit->save();
       Redirect::to('/credit/' . $credit->id, array('message' => 'Suorituksen tiedot lisättiin järjestelmään!'));
     } else {
-        View::make('credit/new.html', array('errors' => $errors, 'attributes' => $attributes));
+      $persons = Person::all();
+      $topics = Topic::all();
+      View::make('credit/new.html', array('errors' => $errors, 'attributes' => $attributes, 'persons' => $persons, 'topics' => $topics));
     }
   }
   
@@ -56,6 +68,16 @@ class CreditController extends BaseController{
     
     if (!isset($params['interrupted'])) {
       $params['interrupted'] = null;
+    } else {
+      $params['grade'] = 0;  
+    }
+    
+    if(!isset($params['givenby'])) {
+      $params['givenby'] = null;
+    }
+    
+    if(!isset($params['topic'])) {
+      $params['topic'] = null;
     }
     
     $attributes = array(
@@ -72,10 +94,11 @@ class CreditController extends BaseController{
     $errors = $credit->errors();
 
     if (count($errors) > 0){
-      View::make('credit/edit.html', array('errors' => $errors, 'attributes' => $attributes));
+      $persons = Person::all();
+      $topics = Topic::all();  
+      View::make('credit/edit.html', array('errors' => $errors, 'attributes' => $attributes, 'persons' => $persons, 'topics' => $topics));
     } else {
       $credit->update();
-
       Redirect::to('/credit/' . $credit->id, array('message' => 'Suorituksen tietoja muokattiin onnistuneesti!'));
     }
   }

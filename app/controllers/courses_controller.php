@@ -21,6 +21,10 @@ class CourseController extends BaseController{
   public static function store() {
     $params = $_POST;
     
+    if(!isset($params['incharge'])) {
+      $params['incharge'] = null;
+    }
+    
     $attributes = array(
       'name' => $params['name'],
       'incharge' => $params['incharge']
@@ -33,7 +37,8 @@ class CourseController extends BaseController{
       $course->save();
       Redirect::to('/course/' . $course->id, array('message' => 'Kurssin tiedot lisättiin järjestelmään!'));
     } else {
-      View::make('course/new.html', array('errors' => $errors, 'attributes' => $attributes));
+      $persons = Person::all();  
+      View::make('course/new.html', array('errors' => $errors, 'attributes' => $attributes, 'persons' => $persons));
     }
   }
   
@@ -46,6 +51,10 @@ class CourseController extends BaseController{
   public static function update($id) {
     $params = $_POST;
     
+    if(!isset($params['incharge'])) {
+      $params['incharge'] = null;
+    }
+    
     $attributes = array(
       'id' =>  $id,
       'name' => $params['name'],
@@ -56,10 +65,10 @@ class CourseController extends BaseController{
     $errors = $course->errors();
 
     if (count($errors) > 0){
-      View::make('course/edit.html', array('errors' => $errors, 'attributes' => $attributes));
+      $persons = Person::all(); 
+      View::make('course/edit.html', array('errors' => $errors, 'attributes' => $attributes, 'persons' => $persons));
     } else {
       $course->update();
-
       Redirect::to('/course/' . $course->id, array('message' => 'Kurssin tietoja muokattiin onnistuneesti!'));
     }
   }

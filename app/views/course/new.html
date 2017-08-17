@@ -10,9 +10,10 @@
 
     <div class="form-group">
       <label>Valitse kurssin vastuuhenkilö</label>
-      <select class="form-control" name="incharge">
+      <select class="form-control" name="incharge">  
+        <option value=""></option>  
         {% for person in persons %}
-        <option value="{% if attributes %}{{attributes.name}}{% else %}{{person.id}}{% endif %}"> {{person.name}}</option>
+        <option value="{{person.id}}" {% if person.id == attributes.incharge %} selected="true" {% endif %} > {{person.name}}</option>
         {% endfor %}
       </select>
     </div>

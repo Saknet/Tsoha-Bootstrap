@@ -6,7 +6,7 @@ class Course extends BaseModel{
 
   public function __construct($attributes){
     parent::__construct($attributes);
-    $this->validators = array('validate_name');
+    $this->validators = array('validate_name', 'validate_incharge');
   }
   
   public static function all(){
@@ -82,5 +82,9 @@ class Course extends BaseModel{
   public function validate_name() {
     return $this->validate_string_length('Nimen', $this->name, 2, 50);
   }  
+  
+  public function validate_incharge() {
+    return $this->validate_select('Kurssin vastuuhenkilö', $this->incharge);  
+  }
 }
 

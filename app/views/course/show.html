@@ -35,7 +35,7 @@
           <td><a href="{{base_path}}/topic/{{topic.id}}">{{topic.name}}</a></td>
           <td>{{topic.description}}</td>
           <td>
-            {% for p in topic.person %}
+            {% for p in topic.persons %}
             <a href="{{base_path}}/person/{{p.id}}">{{p.name}} </a>
             {% endfor %} 
           </td>

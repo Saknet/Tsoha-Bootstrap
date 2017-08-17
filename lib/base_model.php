@@ -61,10 +61,10 @@
       return $errors;
     }
     
-    public function validate_topic_persons($persons) {
+    public function validate_select($value, $array) {
       $errors = array();
-      if ($persons == null) {
-          $errors[] = 'Aiheella tulee olla vähintään yksi vastuunhenkilö';      
+      if ($array == null) {
+          $errors[] = $value . ' kenttä ei saa olla tyhjä!';      
       }
       return $errors;
     }

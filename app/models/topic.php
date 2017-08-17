@@ -6,7 +6,7 @@ class Topic extends BaseModel{
 
   public function __construct($attributes){
     parent::__construct($attributes);
-    $this->validators = array('validate_name', 'validate_description', 'validate_persons');   
+    $this->validators = array('validate_name', 'validate_description', 'validate_persons', 'validate_course');   
   }
   
   public static function all(){
@@ -78,7 +78,7 @@ class Topic extends BaseModel{
       $topics[] = new Topic(array(
         'id' => $row['id'],
         'name' => $row['name'],
-        'person' => Person::find($row['person']),
+        'persons' => Person::find_many_persons_with_topic_id($row['id']),
         'description' => $row['description'],
         'course' => Course::find($row['course'])
       ));
@@ -195,6 +195,10 @@ class Topic extends BaseModel{
   }
   
   public function validate_persons() {
-    return $this->validate_topic_persons($this->persons);  
+    return $this->validate_select('Aiheen vastuuhenkilöt', $this->persons);  
+  }
+  
+  public function validate_course() {
+    return $this->validate_select('Aiheen kurssi', $this->course);  
   }
 }

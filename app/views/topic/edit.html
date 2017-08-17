@@ -12,7 +12,7 @@
       <label>Valitse aiheen vastuuhenkilöt</label>
       <select class="form-control" name="persons[]" multiple="multiple">        
         {% for person in persons %}
-        <option value="{{person.id}}"> {{person.name}}</option>
+        <option value="{{person.id}}" {% for pi in attributes.persons %} {% if person.id == pi.id %} selected="true" {% endif %} {% endfor %}> {{person.name}}</option>
         {% endfor %}
       </select>
     </div>
@@ -24,9 +24,10 @@
       
     <div class="form-group">
       <label>Valitse aiheen kurssi</label>
-      <select class="form-control" name="course">         
+      <select class="form-control" name="course">
+        <option value=""></option>                      
         {% for course in courses %}
-        <option value="{{course.id}}"> {{course.name}}</option>
+        <option value="{{course.id}}" {% if course.id == attributes.course.id %} selected="true" {% endif %}> {{course.name}}</option>
         {% endfor %}
       </select>
     </div>

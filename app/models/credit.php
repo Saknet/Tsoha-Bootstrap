@@ -6,7 +6,7 @@ class Credit extends BaseModel{
 
   public function __construct($attributes){
     parent::__construct($attributes);
-    $this->validators = array('validate_startdate', 'validate_enddate', 'validate_grade');    
+    $this->validators = array('validate_startdate', 'validate_enddate', 'validate_grade', 'validate_person', 'validate_topic');    
   }
 				
   public static function all(){
@@ -101,5 +101,13 @@ class Credit extends BaseModel{
   
   public function validate_grade() {
       return $this->validate_number($this->grade);  
+  }
+  
+  public function validate_person() {
+    return $this->validate_select('Arvioija', $this->givenby);  
+  }
+  
+  public function validate_topic() {
+    return $this->validate_select('Aihe', $this->topic);  
   }
 }

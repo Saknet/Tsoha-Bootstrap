@@ -5,24 +5,26 @@
   <form method="post" action="{{base_path}}/credit">
     <div class="form-group">
       <label>Valitse arvioija</label>
-      <select name="givenby" class="form-control">
+      <select class="form-control" name="givenby">
+        <option value=""></option>     
         {% for person in persons %}
-        <option value="{{person.id}}">{{person.name}}</option>
+        <option value="{{person.id}}" {% if person.id == attributes.givenby %} selected="true" {% endif %}>{{person.name}}</option>
         {% endfor %}
       </select>
     </div>
 
     <div class="form-group">
       <label>Valitse aihe</label>
-      <select name="topic" class="form-control">
+      <select class="form-control" name="topic">
+        <option value=""></option>   
         {% for topic in topics %}
-        <option value="{{topic.id}}">{{topic.name}}</option>
+        <option value="{{topic.id}}" {% if topic.id == attributes.topic %} selected="true" {% endif %}>{{topic.name}}</option>
         {% endfor %}
       </select>
     </div>
       
     <div class="checkbox">
-      <label><input name="interrupted" type="checkbox">Keskeytetty</label>
+      <label><input name="interrupted" type="checkbox" {% if attributes.interrupted %} checked="checked" {% endif %}>Keskeytetty</label>
     </div>     
 
     <div class="form-group">

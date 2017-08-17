@@ -27,6 +27,10 @@ class TopicController extends BaseController{
       $params['persons'] = null;
     }
     
+    if(!isset($params['course'])) {
+      $params['course'] = null;
+    }
+    
     $attributes = array(
       'name' => $params['name'],
       'persons' => $params['persons'],
@@ -41,7 +45,9 @@ class TopicController extends BaseController{
       $topic->save();
       Redirect::to('/topic/' . $topic->id, array('message' => 'Aiheen tiedot lisättiin järjestelmään!'));
     } else {
-      View::make('topic/new.html', array('errors' => $errors, 'attributes' => $attributes));   
+      $persons = Person::all();
+      $courses = Course::all();  
+      View::make('topic/new.html', array('errors' => $errors, 'attributes' => $attributes, 'persons' => $persons, 'courses' => $courses));   
     }
   }
   
@@ -59,6 +65,10 @@ class TopicController extends BaseController{
       $params['persons'] = null;
     }
     
+    if(!isset($params['course'])) {
+      $params['course'] = null;
+    }
+    
     $attributes = array(
       'id' =>  $id,
       'name' => $params['name'],
@@ -72,10 +82,11 @@ class TopicController extends BaseController{
     $errors = $topic->errors();
 
     if (count($errors) > 0){
-      View::make('topic/edit.html', array('errors' => $errors, 'attributes' => $attributes));
+      $persons = Person::all();
+      $courses = Course::all();         
+      View::make('topic/edit.html', array('errors' => $errors, 'attributes' => $attributes, 'persons' => $persons, 'courses' => $courses));     
     } else {
       $topic->update();
-
       Redirect::to('/topic/' . $topic->id, array('message' => 'Aiheen tietoja muokattiin onnistuneesti!'));
     }
   }
