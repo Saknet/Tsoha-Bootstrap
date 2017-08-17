@@ -84,7 +84,7 @@ class TopicController extends BaseController{
     if (count($errors) > 0){
       $persons = Person::all();
       $courses = Course::all();         
-      View::make('topic/edit.html', array('errors' => $errors, 'attributes' => $attributes, 'persons' => $persons, 'courses' => $courses));     
+      View::make('topic/edit.html', array('errors' => $errors, 'attributes' => $attributes, 'persons' => $persons, 'courses' => $courses, 'editcheck' => true));     
     } else {
       $topic->update();
       Redirect::to('/topic/' . $topic->id, array('message' => 'Aiheen tietoja muokattiin onnistuneesti!'));

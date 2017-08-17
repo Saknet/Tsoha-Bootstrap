@@ -12,7 +12,11 @@
       <label>Valitse aiheen vastuuhenkilöt</label>
       <select class="form-control" name="persons[]" multiple="multiple">        
         {% for person in persons %}
+        {% if editcheck %}
+        <option value="{{person.id}}" {% for pi in attributes.persons %} {% if person.id == pi %} selected="true" {% endif %} {% endfor %}> {{person.name}}</option>
+        {% else %}
         <option value="{{person.id}}" {% for pi in attributes.persons %} {% if person.id == pi.id %} selected="true" {% endif %} {% endfor %}> {{person.name}}</option>
+        {% endif %} 
         {% endfor %}
       </select>
     </div>
@@ -27,7 +31,11 @@
       <select class="form-control" name="course">
         <option value=""></option>                      
         {% for course in courses %}
-        <option value="{{course.id}}" {% if course.id == attributes.course.id %} selected="true" {% endif %}> {{course.name}}</option>
+        {% if editcheck %}
+        <option value="{{course.id}}" {% if course.id == attributes.course %} selected="true" {% endif %} > {{course.name}}</option>
+        {% else %}
+        <option value="{{course.id}}" {% if course.id == attributes.course.id %} selected="true" {% endif %} > {{course.name}}</option>
+        {% endif %}        
         {% endfor %}
       </select>
     </div>

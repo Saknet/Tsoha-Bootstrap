@@ -56,7 +56,7 @@ class CourseController extends BaseController{
     }
     
     $attributes = array(
-      'id' =>  $id,
+      'id' => $id,
       'name' => $params['name'],
       'incharge' => $params['incharge']
     ); 
@@ -66,7 +66,7 @@ class CourseController extends BaseController{
 
     if (count($errors) > 0){
       $persons = Person::all(); 
-      View::make('course/edit.html', array('errors' => $errors, 'attributes' => $attributes, 'persons' => $persons));
+      View::make('course/edit.html', array('errors' => $errors, 'attributes' => $attributes, 'persons' => $persons, 'editcheck' => true));
     } else {
       $course->update();
       Redirect::to('/course/' . $course->id, array('message' => 'Kurssin tietoja muokattiin onnistuneesti!'));

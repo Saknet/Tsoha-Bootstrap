@@ -5,7 +5,7 @@
   <form method="post" action="{{base_path}}/topic">
     <div class="form-group">
       <label>Aiheen nimi</label>
-      <input type="text" name="name" class="form-control" value="{% if attributes %}{{attributes.name}}{% endif %}">
+      <input type="text" name="name" class="form-control" value="{{attributes.name}}">
     </div>
 
     <div class="form-group">
@@ -19,7 +19,7 @@
 
      <div class="form-group">
       <label>Aiheen kuvaus</label>
-      <input type="text" name="description" class="form-control" value="{% if attributes %}{{attributes.description}}{% endif %}">
+      <input type="text" name="description" class="form-control" value="{{attributes.description}}">
     </div>  
       
     <div class="form-group">

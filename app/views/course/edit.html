@@ -13,7 +13,11 @@
       <select class="form-control" name="incharge">  
         <option value=""></option>  
         {% for person in persons %}
+        {% if editcheck %}
+        <option value="{{person.id}}" {% if person.id == attributes.incharge %} selected="true" {% endif %} > {{person.name}}</option>
+        {% else %}
         <option value="{{person.id}}" {% if person.id == attributes.incharge.id %} selected="true" {% endif %} > {{person.name}}</option>
+        {% endif %}
         {% endfor %}
       </select>
     </div>

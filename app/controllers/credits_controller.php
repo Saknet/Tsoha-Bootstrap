@@ -96,7 +96,7 @@ class CreditController extends BaseController{
     if (count($errors) > 0){
       $persons = Person::all();
       $topics = Topic::all();  
-      View::make('credit/edit.html', array('errors' => $errors, 'attributes' => $attributes, 'persons' => $persons, 'topics' => $topics));
+      View::make('credit/edit.html', array('errors' => $errors, 'attributes' => $attributes, 'persons' => $persons, 'topics' => $topics, 'editcheck' => true));
     } else {
       $credit->update();
       Redirect::to('/credit/' . $credit->id, array('message' => 'Suorituksen tietoja muokattiin onnistuneesti!'));
