@@ -6,7 +6,7 @@
   
   {% if user_logged_in %}
   <p>
-    {{forms.destroy_button("#{base_path}/topic/#{topic.id}/destroy")}}
+    {{forms.destroy_button("#{base_path}/topic/#{topic.id}/destroy", "aiheen")}}
     {{forms.edit_link("#{base_path}/topic/#{topic.id}/edit")}}
   </p>
   {% endif %}

@@ -12,6 +12,7 @@ class CreditController extends BaseController{
     View::make('credit/show.html', array('credit' => $credit));
   }
   public static function create() {
+    self::check_logged_in();
     $persons = Person::all();
     $topics = Topic::all();
     View::make('credit/new.html', array('persons' => $persons, 'topics' => $topics));   
@@ -57,6 +58,7 @@ class CreditController extends BaseController{
   }
   
   public static function edit($id) {
+    self::check_logged_in();      
     $persons = Person::all();
     $topics = Topic::all();
     $credit = Credit::find($id);
@@ -104,6 +106,7 @@ class CreditController extends BaseController{
   }
 
   public static function destroy($id) {
+    self::check_logged_in();  
     $credit = new Credit(array('id' => $id));
     $credit->destroy();
 

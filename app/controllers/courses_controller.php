@@ -14,6 +14,7 @@ class CourseController extends BaseController{
   }  
   
   public static function create() {
+    self::check_admin();
     $persons = Person::all();
     View::make('course/new.html', array('persons' => $persons));   
   }
@@ -43,6 +44,7 @@ class CourseController extends BaseController{
   }
   
   public static function edit($id) {
+    self::check_logged_in();
     $course = Course::find($id);
     $persons = Person::all();
     View::make('course/edit.html', array('attributes' => $course, 'persons' => $persons));
@@ -74,6 +76,7 @@ class CourseController extends BaseController{
   }
 
   public static function destroy($id) {
+    self::check_admin();
     $course = new Course(array('id' => $id));
     $course->destroy();
 

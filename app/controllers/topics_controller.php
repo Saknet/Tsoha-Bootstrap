@@ -15,6 +15,7 @@ class TopicController extends BaseController{
   }
   
   public static function create() {
+    self::check_logged_in();
     $persons = Person::all();
     $courses = Course::all();
     View::make('topic/new.html', array('persons' => $persons, 'courses' => $courses));   
@@ -52,6 +53,7 @@ class TopicController extends BaseController{
   }
   
   public static function edit($id) {
+    self::check_logged_in();
     $persons = Person::all();
     $courses = Course::all();
     $topic = Topic::find($id);
@@ -92,6 +94,7 @@ class TopicController extends BaseController{
   }
 
   public static function destroy($id) {
+    self::check_logged_in();
     $topic = new Topic(array('id' => $id));
     $topic->destroy();
 

@@ -15,6 +15,7 @@ class PersonController extends BaseController{
   }
   
   public static function create() {
+    self::check_logged_in();
     View::make('person/new.html');   
   }
   
@@ -39,6 +40,7 @@ class PersonController extends BaseController{
   }
   
   public static function edit($id) {
+    self::check_admin();
     $person = Person::find($id);
     View::make('person/edit.html', array('attributes' => $person));
   }
@@ -71,6 +73,7 @@ class PersonController extends BaseController{
   }
 
   public static function destroy($id) {
+    self::check_admin();
     $person = new Person(array('id' => $id));
     $person->destroy();
 

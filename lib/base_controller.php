@@ -2,7 +2,7 @@
 
   class BaseController{
 
-    public static function get_user_logged_in(){
+    public static function get_user_logged_in() {
       if (isset($_SESSION['user'])) {
         $person_id = $_SESSION['user'];
         $person = Person::find($person_id);
@@ -12,9 +12,9 @@
     return null;
     }
 
-    public static function check_logged_in(){
+    public static function check_logged_in() {
       if(!isset($_SESSION['user'])) {
-        Redirect::to('/login', array('message' => 'Tämän toiminnon käyttäminen vaatii sisäänkirjautumista!'));
+        Redirect::to('/login', array('message' => 'Kirjaudu ensin sisään'));
       }
     }
     
@@ -25,5 +25,11 @@
     
     public static function get_is_admin() {
       return is_admin();
+    }
+    
+    public static function check_admin() {
+      if(!self::is_admin()) {
+        Redirect::to('/login', array('message' => 'Kirjaudu ensin sisään ylläpitäjänä'));
+      }        
     }
   }

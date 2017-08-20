@@ -6,7 +6,7 @@
 
 <p>
     {% if user_logged_in.admin %}
-    {{forms.destroy_button("#{base_path}/course/#{course.id}/destroy")}}
+    {{forms.destroy_button("#{base_path}/course/#{course.id}/destroy", "kurssin")}}
     {% endif %}
     {% if user_logged_in %}
     {{forms.edit_link("#{base_path}/course/#{course.id}/edit")}}
