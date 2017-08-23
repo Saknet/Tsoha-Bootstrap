@@ -11,7 +11,7 @@ class Course extends BaseModel{
   
   public static function all(){
 
-    $query = DB::connection()->prepare('SELECT * FROM Course');
+    $query = DB::connection()->prepare('SELECT * FROM Course ORDER BY name');
     $query->execute();
     $rows = $query->fetchAll();
     $courses = array();

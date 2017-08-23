@@ -22,11 +22,7 @@
       $person = Person::find($_SESSION['user']);
       return $person->admin;
     }
-    
-    public static function get_is_admin() {
-      return is_admin();
-    }
-    
+       
     public static function check_admin() {
       if(!self::is_admin()) {
         Redirect::to('/login', array('message' => 'Kirjaudu ensin sisään ylläpitäjänä'));

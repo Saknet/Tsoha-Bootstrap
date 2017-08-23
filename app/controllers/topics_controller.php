@@ -1,10 +1,32 @@
 <?php
 
 class TopicController extends BaseController{
-    
+     
   public static function index() {
-    $topics = Topic::all();
-    View::make('topic/index.html', array('topics' => $topics));
+      
+    if (isset($_GET['page'])){
+      $page = preg_replace("#[^0-9]#","",$_GET['page']);                
+    } else {
+      $page = 1;                      
+    }  
+       
+    $totalTopics = Topic::count();
+    $pages = ceil($totalTopics/5);  
+    $topics = Topic::all($page);
+    
+    if ($page > 1) {
+      $prev_page = $page - 1;
+    } else {
+      $prev_page = 1;
+    }
+    
+    if ($page < $pages) {
+      $next_page = $page + 1;
+    } else {
+      $next_page = $pages; 
+    }
+    
+    View::make('topic/index.html', array('topics' => $topics, 'pages' => $pages, 'prev_page' => $prev_page, 'next_page' => $next_page));
   }
   
   public static function show($id) {
@@ -24,11 +46,11 @@ class TopicController extends BaseController{
   public static function store() {
     $params = $_POST;
     
-    if(!isset($params['persons'])) {
+    if (!isset($params['persons'])) {
       $params['persons'] = null;
     }
     
-    if(!isset($params['course'])) {
+    if (!isset($params['course'])) {
       $params['course'] = null;
     }
     
@@ -63,11 +85,11 @@ class TopicController extends BaseController{
   public static function update($id) {
     $params = $_POST;
     
-    if(!isset($params['persons'])) {
+    if (!isset($params['persons'])) {
       $params['persons'] = null;
     }
     
-    if(!isset($params['course'])) {
+    if (!isset($params['course'])) {
       $params['course'] = null;
     }
     

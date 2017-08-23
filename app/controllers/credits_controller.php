@@ -3,8 +3,29 @@
 class CreditController extends BaseController{
     
   public static function index() {
-    $credits = Credit::all();
-    View::make('credit/index.html', array('credits' => $credits));
+    if (isset($_GET['page'])){
+      $page = preg_replace("#[^0-9]#","",$_GET['page']);                
+    } else {
+      $page = 1;                      
+    }  
+       
+    $totalCredits = Credit::count();
+    $pages = ceil($totalCredits/5);  
+    $credits = Credit::all($page);
+    
+    if ($page > 1) {
+      $prev_page = $page - 1;
+    } else {
+      $prev_page = 1;
+    }
+    
+    if ($page < $pages) {
+      $next_page = $page + 1;
+    } else {
+      $next_page = $pages; 
+    }
+    
+    View::make('credit/index.html', array('credits' => $credits, 'pages' => $pages, 'prev_page' => $prev_page, 'next_page' => $next_page));
   }
   
   public static function show($id) {
@@ -27,11 +48,11 @@ class CreditController extends BaseController{
       $params['grade'] = 0;  
     }
     
-    if(!isset($params['givenby'])) {
+    if (!isset($params['givenby'])) {
       $params['givenby'] = null;
     }
     
-    if(!isset($params['topic'])) {
+    if (!isset($params['topic'])) {
       $params['topic'] = null;
     }
       
@@ -74,11 +95,11 @@ class CreditController extends BaseController{
       $params['grade'] = 0;  
     }
     
-    if(!isset($params['givenby'])) {
+    if (!isset($params['givenby'])) {
       $params['givenby'] = null;
     }
     
-    if(!isset($params['topic'])) {
+    if (!isset($params['topic'])) {
       $params['topic'] = null;
     }
     

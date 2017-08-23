@@ -9,10 +9,10 @@ class Credit extends BaseModel{
     $this->validators = array('validate_startdate', 'validate_enddate', 'validate_grade', 'validate_person', 'validate_topic');    
   }
 				
-  public static function all(){
-
-    $query = DB::connection()->prepare('SELECT * FROM Credit');
-    $query->execute();
+  public static function all($page){
+    $query = DB::connection()->prepare('SELECT * FROM Credit LIMIT :limit OFFSET :offset');
+    $page_size = 5;
+    $query->execute(array('limit' => $page_size, 'offset' => $page_size * ($page - 1)));
     $rows = $query->fetchAll();
     $credits = array();
 
@@ -89,6 +89,13 @@ class Credit extends BaseModel{
   public function destroy() {
     $query = DB::connection()->prepare('DELETE FROM Credit WHERE id = :id');
     $query->execute(array('id' => $this->id));
+  }
+  
+  public static function count() {
+    $query = DB::connection()->prepare('SELECT Count(*) FROM Credit');
+    $query->execute();
+    $row = $query->fetch(); 
+    return $row[0];
   }
   
   public function validate_startdate() {

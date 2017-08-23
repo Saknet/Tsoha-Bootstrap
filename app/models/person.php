@@ -11,7 +11,7 @@ class Person extends BaseModel{
   
   public static function all(){
 
-    $query = DB::connection()->prepare('SELECT * FROM Person');
+    $query = DB::connection()->prepare('SELECT * FROM Person ORDER BY name');
     $query->execute();
     $rows = $query->fetchAll();
     $persons = array();

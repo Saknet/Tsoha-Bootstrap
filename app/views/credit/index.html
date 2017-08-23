@@ -29,7 +29,7 @@
     <tbody>
       {% for credit in credits %}
       <tr>
-        <td><a href="{{base_path}}/credit/{{credit.id}}">{{credit.id}}</a></td>
+        <td><a href="{{base_path}}/credit/{{credit.id}}">Linkki suoritukseen</a></td>
         <td><a href="{{base_path}}/topic/{{credit.topic.id}}">{{credit.topic.name}}</a></td>
         <td><a href="{{base_path}}/person/{{credit.givenby.id}}">{{credit.givenby.name}}</a></td>
         <td>{{credit.startdate}}</td>
@@ -49,4 +49,14 @@
       {% endfor %}
     </tbody>
   </table>
+  
+  <nav>
+  <ul class="pagination">
+    <li class="{% if not prev_page %}disabled{% endif %}"><a href="{{base_path}}/topic?page={{prev_page}}"><span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>
+    {% for page in 1..pages %}
+      <li class="{% if curr_page == page %}active{% endif %}"><a href="{{base_path}}/topic?page={{page}}">{{page}}</a></li>
+    {% endfor %}
+    <li class="{% if not next_page %}disabled{% endif %}"><a href="{{base_path}}/topic?page={{next_page}}"><span aria-hidden="true">»</span><span class="sr-only">Next</span></a></li>
+  </ul>
+  </nav>
 {% endblock %}

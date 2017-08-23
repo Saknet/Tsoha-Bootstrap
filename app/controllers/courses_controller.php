@@ -22,7 +22,7 @@ class CourseController extends BaseController{
   public static function store() {
     $params = $_POST;
     
-    if(!isset($params['incharge'])) {
+    if (!isset($params['incharge'])) {
       $params['incharge'] = null;
     }
     
@@ -53,7 +53,7 @@ class CourseController extends BaseController{
   public static function update($id) {
     $params = $_POST;
     
-    if(!isset($params['incharge'])) {
+    if (!isset($params['incharge'])) {
       $params['incharge'] = null;
     }
     

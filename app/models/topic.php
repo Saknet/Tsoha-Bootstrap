@@ -9,10 +9,10 @@ class Topic extends BaseModel{
     $this->validators = array('validate_name', 'validate_description', 'validate_persons', 'validate_course');   
   }
   
-  public static function all(){
-
-    $query = DB::connection()->prepare('SELECT * FROM Topic');
-    $query->execute();
+  public static function all($page){
+    $query = DB::connection()->prepare('SELECT * FROM Topic ORDER BY name LIMIT :limit OFFSET :offset');
+    $page_size = 5;
+    $query->execute(array('limit' => $page_size, 'offset' => $page_size * ($page - 1)));
     $rows = $query->fetchAll();
     $topics = array();
 
@@ -25,7 +25,7 @@ class Topic extends BaseModel{
         'course' => Course::find($row['course'])
       ));
     }
-
+    
     return $topics;
   }
    
@@ -117,6 +117,13 @@ class Topic extends BaseModel{
   public function destroy() {
     $query = DB::connection()->prepare('DELETE FROM Topic WHERE id = :id');
     $query->execute(array('id' => $this->id));
+  }
+  
+  public static function count() {
+    $query = DB::connection()->prepare('SELECT Count(*) FROM Topic');
+    $query->execute();
+    $row = $query->fetch(); 
+    return $row[0];
   }
   
   public function averageGrade() {

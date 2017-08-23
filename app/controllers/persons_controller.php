@@ -48,7 +48,7 @@ class PersonController extends BaseController{
   public static function update($id) {
     $params = $_POST;
     
-    if(!isset($params['admin'])) {
+    if (!isset($params['admin'])) {
       $params['admin'] = null;
     }
 
