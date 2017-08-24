@@ -52,11 +52,11 @@
   
   <nav>
   <ul class="pagination">
-    <li class="{% if not prev_page %}disabled{% endif %}"><a href="{{base_path}}/topic?page={{prev_page}}"><span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>
+    <li class="{% if not prev_page %}disabled{% endif %}"><a href="{{base_path}}/credit?page={{prev_page}}"><span aria-hidden="true">«</span><span class="sr-only">Previous</span></a></li>
     {% for page in 1..pages %}
-      <li class="{% if curr_page == page %}active{% endif %}"><a href="{{base_path}}/topic?page={{page}}">{{page}}</a></li>
+      <li class="{% if curr_page == page %}active{% endif %}"><a href="{{base_path}}/credit?page={{page}}">{{page}}</a></li>
     {% endfor %}
-    <li class="{% if not next_page %}disabled{% endif %}"><a href="{{base_path}}/topic?page={{next_page}}"><span aria-hidden="true">»</span><span class="sr-only">Next</span></a></li>
+    <li class="{% if not next_page %}disabled{% endif %}"><a href="{{base_path}}/credit?page={{next_page}}"><span aria-hidden="true">»</span><span class="sr-only">Next</span></a></li>
   </ul>
   </nav>
 {% endblock %}

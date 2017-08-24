@@ -10,9 +10,14 @@ class Topic extends BaseModel{
   }
   
   public static function all($page){
-    $query = DB::connection()->prepare('SELECT * FROM Topic ORDER BY name LIMIT :limit OFFSET :offset');
-    $page_size = 5;
-    $query->execute(array('limit' => $page_size, 'offset' => $page_size * ($page - 1)));
+    if ($page > 0) {
+      $query = DB::connection()->prepare('SELECT * FROM Topic ORDER BY name LIMIT :limit OFFSET :offset');
+      $query->execute(array('limit' => 5, 'offset' => 5 * ($page - 1)));
+    } else {
+      $query = DB::connection()->prepare('SELECT * FROM Topic ORDER BY name');
+      $query->execute();
+    }
+    
     $rows = $query->fetchAll();
     $topics = array();
 
