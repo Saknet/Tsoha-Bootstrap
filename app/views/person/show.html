@@ -4,13 +4,13 @@
 
 <h1>{{person.name}}</h1>
 
-  {% if user_logged_in.admin %}
+  {% if (user_logged_in.admin or user_logged_in.id == person.id) %}
   <p>
     {{forms.destroy_button("#{base_path}/person/#{person.id}/destroy", "käyttäjän")}}
     {{forms.edit_link("#{base_path}/person/#{person.id}/edit")}}
   </p>
   {% endif %}
- 
+  
   <ul>
     <li><strong>Käyttäjän nimi:</strong> {{person.name}}</li>
     <li><strong>Ylläpitäjä:</strong>

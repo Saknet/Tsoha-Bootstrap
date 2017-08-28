@@ -1,9 +1,13 @@
 <?php
-
+/**
+ *  Handles requests related to topic model.
+ */
 class TopicController extends BaseController{
-     
-  public static function index() {
-      
+    
+  /**
+   * Lists all topics, using paging. 
+   */      
+  public static function index() {      
     if (isset($_GET['page'])){
       $page = preg_replace("#[^0-9]#","",$_GET['page']);                
     } else {
@@ -29,6 +33,11 @@ class TopicController extends BaseController{
     View::make('topic/index.html', array('topics' => $topics, 'pages' => $pages, 'prev_page' => $prev_page, 'next_page' => $next_page));
   }
   
+  /**
+   * Shows a topic's view.
+   *
+   * @param int $id Id of the topic.
+   */  
   public static function show($id) {
     $topic = Topic::find($id);
     $credits = Credit::find_by_topic($id);
@@ -36,6 +45,9 @@ class TopicController extends BaseController{
     View::make('topic/show.html', array('topic' => $topic, 'credits' => $credits, 'persons' => $persons));
   }
   
+  /**
+   * Shows page for new topic creation.
+   */   
   public static function create() {
     self::check_logged_in();
     $persons = Person::all();
@@ -43,6 +55,9 @@ class TopicController extends BaseController{
     View::make('topic/new.html', array('persons' => $persons, 'courses' => $courses));   
   }
   
+  /**
+   * Attempts to save new topic into database, then redirects to the newly created topic's view.
+   */   
   public static function store() {
     $params = $_POST;
     
@@ -74,6 +89,11 @@ class TopicController extends BaseController{
     }
   }
   
+  /**
+   * Shows a topic edit page.
+   *
+   * @param int $id Id of a topic.
+   */   
   public static function edit($id) {
     self::check_logged_in();
     $persons = Person::all();
@@ -82,6 +102,11 @@ class TopicController extends BaseController{
     View::make('topic/edit.html', array('attributes' => $topic, 'persons' => $persons, 'courses' => $courses));
   }
   
+  /**
+   * Attempts to update a topic information, then redirects to edited topic's view.
+   *
+   * @param int $id Id of a topic.
+   */   
   public static function update($id) {
     $params = $_POST;
     
@@ -115,6 +140,11 @@ class TopicController extends BaseController{
     }
   }
 
+  /**
+   * Attempts to destroy a topic, then redirects to topic listing.
+   *
+   * @param int $id Id of a topic.
+   */  
   public static function destroy($id) {
     self::check_logged_in();
     $topic = new Topic(array('id' => $id));

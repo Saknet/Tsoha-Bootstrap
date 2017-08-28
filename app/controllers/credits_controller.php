@@ -1,7 +1,12 @@
 <?php
-
+/**
+ *  Handles requests related to credits model.
+ */
 class CreditController extends BaseController{
     
+  /**
+   * Lists all credits, using paging. 
+   */    
   public static function index() {
     if (isset($_GET['page'])){
       $page = preg_replace("#[^0-9]#","",$_GET['page']);                
@@ -28,10 +33,19 @@ class CreditController extends BaseController{
     View::make('credit/index.html', array('credits' => $credits, 'pages' => $pages, 'prev_page' => $prev_page, 'next_page' => $next_page));
   }
   
+  /**
+   * Shows a credit's view.
+   *
+   * @param int $id Id of the credit.
+   */   
   public static function show($id) {
     $credit = Credit::find($id);
     View::make('credit/show.html', array('credit' => $credit));
   }
+  
+  /**
+   * Shows page for new credit creation.
+   */   
   public static function create() {
     self::check_logged_in();
     $persons = Person::all();
@@ -39,6 +53,9 @@ class CreditController extends BaseController{
     View::make('credit/new.html', array('persons' => $persons, 'topics' => $topics));   
   }
   
+  /**
+   * Attempts to save new credit into database, then redirects to the newly created credit's view.
+   */  
   public static function store() {
     $params = $_POST;
       
@@ -78,6 +95,11 @@ class CreditController extends BaseController{
     }
   }
   
+  /**
+   * Shows credit a edit page.
+   *
+   * @param int $id Id of a credit.
+   */  
   public static function edit($id) {
     self::check_logged_in();      
     $persons = Person::all();
@@ -86,6 +108,11 @@ class CreditController extends BaseController{
     View::make('credit/edit.html', array('attributes' => $credit, 'persons' => $persons, 'topics' => $topics));
   }
   
+  /**
+   * Attempts to update a credit information, then redirects to edited credit's view.
+   *
+   * @param int $id Id of a credit.
+   */   
   public static function update($id) {
     $params = $_POST;
     
@@ -126,6 +153,11 @@ class CreditController extends BaseController{
     }
   }
 
+  /**
+   * Attempts to destroy a credit, then redirects to credit listing.
+   *
+   * @param int $id Id of a credit.
+   */  
   public static function destroy($id) {
     self::check_logged_in();  
     $credit = new Credit(array('id' => $id));

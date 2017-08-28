@@ -18,8 +18,9 @@
         <a href="{{base_path}}/person/{{person.id}}"> {{person.name}}</a>
         {% endfor %}
     </li>
-    <li><strong>Suoritettu yhteensä:</strong> {{topic.totalCredits}} kertaa</li>
+    <li><strong>Suoritettu yhteensä:</strong> {{topic.totalPassed}} kertaa</li>
     <li><strong>Keskeytetty yhteensä:</strong> {{topic.interrupted}} kertaa</li>
+    <li><strong>Keskeytysprosentti:</strong> {{topic.dropOutRate}} %</li>
     <li><strong>Suorituksen keskimääräinen kesto:</strong> {{topic.averageTimeSpent}} päivää</li>
     <li><strong>Keskimääräinen hyväksytyn suorituksen arvosana:</strong> {{topic.averageGrade}}</li> 
   </ul>

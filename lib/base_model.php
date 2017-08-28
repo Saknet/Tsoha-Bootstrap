@@ -56,7 +56,7 @@
     public function validate_number($grade) {
       $errors = array(); 
         if(!is_numeric($grade) || $grade < 0 || $grade > 5){
-          $errors[] = 'Arvosanan tulee olla kokonaisluku väliltä 0 - 5';
+          $errors[] = 'Arvosanan tulee olla kokonaisluku väliltä 0 - 5!';
       }
       return $errors;
     }
@@ -65,6 +65,22 @@
       $errors = array();
       if ($array == null) {
           $errors[] = $value . ' kenttä ei saa olla tyhjä!';      
+      }
+      return $errors;
+    }
+    
+    public function validate_unique($value, $array) {
+      $errors = array();
+      if (in_array($value, $array)) {
+          $errors[] = 'Käyttäjätunnus ' . $value . ' on valitettavasti jo käytössä! Olkaa hyvä ja valitkaa jokin toinen käyttäjätunnus.';      
+      }
+      return $errors;
+    } 
+    
+    public function validate_password($password, $verify) {
+      $errors = array();
+      if($password != $verify) {
+        $errors[] = "Sama salasana tulee toistaa kahteen kertaan!";
       }
       return $errors;
     }
