@@ -95,8 +95,8 @@ class Person extends BaseModel{
   * Saves person to database.
   */   
   public function save(){
-    $query = DB::connection()->prepare('INSERT INTO Person (name, username, password) VALUES (:name, :username, :password) RETURNING id');
-    $query->execute(array('name' => $this->name, 'username' => $this->username, 'password' => $this->password));
+    $query = DB::connection()->prepare('INSERT INTO Person (name, username, password, admin) VALUES (:name, :username, :password, :admin) RETURNING id');
+    $query->execute(array('name' => $this->name, 'username' => $this->username, 'password' => $this->password, 'admin' => $this->admin));
     $row = $query->fetch();
     $this->id = $row['id'];
   }

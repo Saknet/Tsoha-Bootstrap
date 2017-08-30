@@ -15,7 +15,8 @@ class TopicController extends BaseController{
     }  
        
     $totalTopics = Topic::count();
-    $pages = ceil($totalTopics/5);  
+    $page_size = 5;
+    $pages = ceil($totalTopics/$page_size);  
     $topics = Topic::all($page);
     
     if ($page > 1) {
@@ -59,6 +60,7 @@ class TopicController extends BaseController{
    * Attempts to save new topic into database, then redirects to the newly created topic's view.
    */   
   public static function store() {
+    self::check_logged_in();  
     $params = $_POST;
     
     if (!isset($params['persons'])) {
@@ -108,6 +110,7 @@ class TopicController extends BaseController{
    * @param int $id Id of a topic.
    */   
   public static function update($id) {
+    self::check_logged_in();   
     $params = $_POST;
     
     if (!isset($params['persons'])) {

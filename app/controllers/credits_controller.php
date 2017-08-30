@@ -13,9 +13,10 @@ class CreditController extends BaseController{
     } else {
       $page = 1;                      
     }  
-       
+    
+    $page_size = 5;
     $totalCredits = Credit::count();
-    $pages = ceil($totalCredits/5);  
+    $pages = ceil($totalCredits/$page_size);  
     $credits = Credit::all($page);
     
     if ($page > 1) {
@@ -57,6 +58,7 @@ class CreditController extends BaseController{
    * Attempts to save new credit into database, then redirects to the newly created credit's view.
    */  
   public static function store() {
+    self::check_logged_in();      
     $params = $_POST;
       
     if (!isset($params['interrupted'])) {
@@ -114,6 +116,7 @@ class CreditController extends BaseController{
    * @param int $id Id of a credit.
    */   
   public static function update($id) {
+    self::check_logged_in();  
     $params = $_POST;
     
     if (!isset($params['interrupted'])) {

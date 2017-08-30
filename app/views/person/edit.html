@@ -12,7 +12,8 @@
       <label>Käyttäjätunnus</label>
       <input type="text" name="username" class="form-control" value="{{attributes.username}}">
     </div>
-
+      
+    {% if user_logged_in.id == attributes.id %}  
     <div class="form-group">
       <label>Salasana</label>
       <input type="text" name="password" class="form-control" value="">
@@ -21,12 +22,15 @@
     <div class="form-group">
       <label>Salasanan vahvistus</label>
       <input type="text" name="verify" class="form-control" value="">
-    </div>        
-      
+    </div>  
+    {% endif %}    
+     
+    {% if user_logged_in.admin %}      
     <div class="checkbox">
       <label><input name="admin" type="checkbox" {% if attributes.admin %} checked="checked" {% endif %}>Ylläpitäjä</label>
     </div> 
-      
+    {% endif %} 
+    
     <div class="form-group">
       <button type="submit" class="btn btn-success">Tallenna</button>
     </div>

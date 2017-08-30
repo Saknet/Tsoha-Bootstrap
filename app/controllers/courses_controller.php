@@ -36,6 +36,7 @@ class CourseController extends BaseController{
    * Attempts to save new course into database, then redirects to the newly created course's view.
    */  
   public static function store() {
+    self::check_admin();  
     $params = $_POST;
     
     if (!isset($params['incharge'])) {
@@ -77,6 +78,7 @@ class CourseController extends BaseController{
    * @param int $id Id of a course.
    */  
   public static function update($id) {
+    self::check_logged_in();  
     $params = $_POST;
     
     if (!isset($params['incharge'])) {
