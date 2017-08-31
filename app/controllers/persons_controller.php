@@ -5,11 +5,33 @@
 class PersonController extends BaseController{
 
   /**
-   * Lists all users (persons).
+   * Lists all users (persons), using paging.
    */     
   public static function index(){
-    $persons = Person::all();
-    View::make('person/index.html', array('persons' => $persons));
+    if (isset($_GET['page'])){
+      $page = preg_replace("#[^0-9]#","",$_GET['page']);                
+    } else {
+      $page = 1;                      
+    }  
+    
+    $page_size = 10;
+    $totalPersons = Person::count();
+    $pages = ceil($totalPersons/$page_size);  
+    $persons = Person::all($page);
+    
+    if ($page > 1) {
+      $prev_page = $page - 1;
+    } else {
+      $prev_page = 1;
+    }
+    
+    if ($page < $pages) {
+      $next_page = $page + 1;
+    } else {
+      $next_page = $pages; 
+    }
+    
+    View::make('person/index.html', array('persons' => $persons, 'pages' => $pages, 'prev_page' => $prev_page, 'next_page' => $next_page));
   }
   
   /**

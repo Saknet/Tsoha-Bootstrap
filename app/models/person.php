@@ -16,14 +16,23 @@ class Person extends BaseModel{
   
   /**
   * Fetches all persons from database.
-  *
+  *  
+  * @param int $page current page number, negative value means that paging is not used. 
+  *  
   * @return array A list of all persons from database.
   */    
-  public static function all(){
-    $query = DB::connection()->prepare('SELECT * FROM Person ORDER BY name');
-    $query->execute();
+  public static function all($page){
+    if ($page > 0) {
+      $page_size = 10;  
+      $query = DB::connection()->prepare('SELECT * FROM Person ORDER BY username LIMIT :limit OFFSET :offset');
+      $query->execute(array('limit' => $page_size, 'offset' => $page_size * ($page - 1)));
+    } else {
+      $query = DB::connection()->prepare('SELECT * FROM Person ORDER BY username');
+      $query->execute();
+    }
+    
     $rows = $query->fetchAll();
-    $persons = array();
+    $courses = array();
 
     foreach($rows as $row){
       $persons[] = new Person(array(
@@ -116,6 +125,18 @@ class Person extends BaseModel{
     $query = DB::connection()->prepare('DELETE FROM Person WHERE id = :id');
     $query->execute(array('id' => $this->id));
   }
+  
+  /**
+  * Counts total number of persons in database.
+  *
+  * @return integer First element of an query array, contains a count of all persons in database.
+  */   
+  public static function count() {
+    $query = DB::connection()->prepare('SELECT Count(*) FROM Person');
+    $query->execute();
+    $row = $query->fetch(); 
+    return $row[0];
+  }  
 
   /**
   * Checks if password belongs to username.

@@ -15,7 +15,7 @@ class TopicController extends BaseController{
     }  
        
     $totalTopics = Topic::count();
-    $page_size = 5;
+    $page_size = 10;
     $pages = ceil($totalTopics/$page_size);  
     $topics = Topic::all($page);
     
@@ -51,8 +51,8 @@ class TopicController extends BaseController{
    */   
   public static function create() {
     self::check_logged_in();
-    $persons = Person::all();
-    $courses = Course::all();
+    $persons = Person::all(-1);
+    $courses = Course::all(-1);
     View::make('topic/new.html', array('persons' => $persons, 'courses' => $courses));   
   }
   
@@ -85,8 +85,8 @@ class TopicController extends BaseController{
       $topic->save();
       Redirect::to('/topic/' . $topic->id, array('message' => 'Aiheen tiedot lisättiin järjestelmään!'));
     } else {
-      $persons = Person::all();
-      $courses = Course::all();  
+      $persons = Person::all(-1);
+      $courses = Course::all(-1);  
       View::make('topic/new.html', array('errors' => $errors, 'attributes' => $attributes, 'persons' => $persons, 'courses' => $courses));   
     }
   }
@@ -98,8 +98,8 @@ class TopicController extends BaseController{
    */   
   public static function edit($id) {
     self::check_logged_in();
-    $persons = Person::all();
-    $courses = Course::all();
+    $persons = Person::all(-1);
+    $courses = Course::all(-1);
     $topic = Topic::find($id);
     View::make('topic/edit.html', array('attributes' => $topic, 'persons' => $persons, 'courses' => $courses));
   }
@@ -134,8 +134,8 @@ class TopicController extends BaseController{
     $errors = $topic->errors();
 
     if (count($errors) > 0){
-      $persons = Person::all();
-      $courses = Course::all();         
+      $persons = Person::all(-1);
+      $courses = Course::all(-1);         
       View::make('topic/edit.html', array('errors' => $errors, 'attributes' => $attributes, 'persons' => $persons, 'courses' => $courses, 'editcheck' => true));     
     } else {
       $topic->update();

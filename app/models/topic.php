@@ -16,12 +16,14 @@ class Topic extends BaseModel{
 
   /**
   * Fetches all topics from database.
+  *  
+  * @param int $page current page number, negative value means that paging is not used. 
   *
   * @return array A list of all topics from database.
   */   
   public static function all($page){
     if ($page > 0) {
-      $page_size = 5;  
+      $page_size = 10;  
       $query = DB::connection()->prepare('SELECT * FROM Topic ORDER BY name LIMIT :limit OFFSET :offset');
       $query->execute(array('limit' => $page_size, 'offset' => $page_size * ($page - 1)));
     } else {
@@ -166,7 +168,7 @@ class Topic extends BaseModel{
   }
   
   /**
-  * Counts total number of topic in database.
+  * Counts total number of topics in database.
   *
   * @return integer First element of an query array, contains a count of all topic in database.
   */   

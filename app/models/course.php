@@ -16,16 +16,24 @@ class Course extends BaseModel{
   
   /**
   * Fetches all courses from database.
-  *
+  *  
+  * @param int $page current page number, negative value means that paging is not used. 
+  * 
   * @return array A list of all courses from database.
   */  
-  public static function all(){
-
-    $query = DB::connection()->prepare('SELECT * FROM Course ORDER BY name');
-    $query->execute();
+  public static function all($page){
+    if ($page > 0) {
+      $page_size = 10;  
+      $query = DB::connection()->prepare('SELECT * FROM Course ORDER BY name LIMIT :limit OFFSET :offset');
+      $query->execute(array('limit' => $page_size, 'offset' => $page_size * ($page - 1)));
+    } else {
+      $query = DB::connection()->prepare('SELECT * FROM Course ORDER BY name');
+      $query->execute();
+    }
+    
     $rows = $query->fetchAll();
     $courses = array();
-
+    
     foreach($rows as $row){
       $courses[] = new Course(array(
         'id' => $row['id'],
@@ -111,6 +119,18 @@ class Course extends BaseModel{
     $query = DB::connection()->prepare('DELETE FROM Course WHERE id = :id');
     $query->execute(array('id' => $this->id));
   }  
+  
+  /**
+  * Counts total number of courses in database.
+  *
+  * @return integer First element of an query array, contains a count of all courses in database.
+  */   
+  public static function count() {
+    $query = DB::connection()->prepare('SELECT Count(*) FROM Course');
+    $query->execute();
+    $row = $query->fetch(); 
+    return $row[0];
+  }
 
   /**
   * Validations for name of course.

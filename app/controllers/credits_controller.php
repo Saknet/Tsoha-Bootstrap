@@ -14,7 +14,7 @@ class CreditController extends BaseController{
       $page = 1;                      
     }  
     
-    $page_size = 5;
+    $page_size = 10;
     $totalCredits = Credit::count();
     $pages = ceil($totalCredits/$page_size);  
     $credits = Credit::all($page);
@@ -49,7 +49,7 @@ class CreditController extends BaseController{
    */   
   public static function create() {
     self::check_logged_in();
-    $persons = Person::all();
+    $persons = Person::all(-1);
     $topics = Topic::all(-1);
     View::make('credit/new.html', array('persons' => $persons, 'topics' => $topics));   
   }
@@ -91,8 +91,8 @@ class CreditController extends BaseController{
       $credit->save();
       Redirect::to('/credit/' . $credit->id, array('message' => 'Suorituksen tiedot lisättiin järjestelmään!'));
     } else {
-      $persons = Person::all();
-      $topics = Topic::all();
+      $persons = Person::all(-1);
+      $topics = Topic::all(-1);
       View::make('credit/new.html', array('errors' => $errors, 'attributes' => $attributes, 'persons' => $persons, 'topics' => $topics));
     }
   }
@@ -104,7 +104,7 @@ class CreditController extends BaseController{
    */  
   public static function edit($id) {
     self::check_logged_in();      
-    $persons = Person::all();
+    $persons = Person::all(-1);
     $topics = Topic::all(-1);
     $credit = Credit::find($id);
     View::make('credit/edit.html', array('attributes' => $credit, 'persons' => $persons, 'topics' => $topics));
@@ -147,8 +147,8 @@ class CreditController extends BaseController{
     $errors = $credit->errors();
 
     if (count($errors) > 0){
-      $persons = Person::all();
-      $topics = Topic::all();  
+      $persons = Person::all(-1);
+      $topics = Topic::all(-1);  
       View::make('credit/edit.html', array('errors' => $errors, 'attributes' => $attributes, 'persons' => $persons, 'topics' => $topics, 'editcheck' => true));
     } else {
       $credit->update();

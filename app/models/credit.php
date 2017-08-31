@@ -16,12 +16,14 @@ class Credit extends BaseModel{
 
   /**
   * Fetches all credits from database.
-  *
+  *  
+  * @param int $page current page number, used for paging.
+  * 
   * @return array A list of all credits from database.
   */   
   public static function all($page){
     $query = DB::connection()->prepare('SELECT * FROM Credit LIMIT :limit OFFSET :offset');
-    $page_size = 5;
+    $page_size = 10;
     $query->execute(array('limit' => $page_size, 'offset' => $page_size * ($page - 1)));
     $rows = $query->fetchAll();
     $credits = array();

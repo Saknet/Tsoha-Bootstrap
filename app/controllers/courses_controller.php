@@ -5,11 +5,33 @@
 class CourseController extends BaseController{
    
   /**
-   * Lists all courses.
+   * Lists all courses, using paging.
    */    
   public static function index() {
-    $courses = Course::all();
-    View::make('course/index.html', array('courses' => $courses));
+    if (isset($_GET['page'])){
+      $page = preg_replace("#[^0-9]#","",$_GET['page']);                
+    } else {
+      $page = 1;                      
+    }  
+    
+    $page_size = 10;
+    $totalCourses = Course::count();
+    $pages = ceil($totalCourses/$page_size);  
+    $courses = Course::all($page);
+    
+    if ($page > 1) {
+      $prev_page = $page - 1;
+    } else {
+      $prev_page = 1;
+    }
+    
+    if ($page < $pages) {
+      $next_page = $page + 1;
+    } else {
+      $next_page = $pages; 
+    }
+
+    View::make('course/index.html', array('courses' => $courses, 'pages' => $pages, 'prev_page' => $prev_page, 'next_page' => $next_page));
   }
  
   /**
@@ -28,7 +50,7 @@ class CourseController extends BaseController{
    */  
   public static function create() {
     self::check_admin();
-    $persons = Person::all();
+    $persons = Person::all(-1);
     View::make('course/new.html', array('persons' => $persons));   
   }
   
@@ -55,7 +77,7 @@ class CourseController extends BaseController{
       $course->save();
       Redirect::to('/course/' . $course->id, array('message' => 'Kurssin tiedot lisättiin järjestelmään!'));
     } else {
-      $persons = Person::all();  
+      $persons = Person::all(-1);  
       View::make('course/new.html', array('errors' => $errors, 'attributes' => $attributes, 'persons' => $persons));
     }
   }
@@ -68,7 +90,7 @@ class CourseController extends BaseController{
   public static function edit($id) {
     self::check_logged_in();
     $course = Course::find($id);
-    $persons = Person::all();
+    $persons = Person::all(-1);
     View::make('course/edit.html', array('attributes' => $course, 'persons' => $persons));
   }
   
@@ -95,7 +117,7 @@ class CourseController extends BaseController{
     $errors = $course->errors();
 
     if (count($errors) > 0){
-      $persons = Person::all(); 
+      $persons = Person::all(-1); 
       View::make('course/edit.html', array('errors' => $errors, 'attributes' => $attributes, 'persons' => $persons, 'editcheck' => true));
     } else {
       $course->update();
